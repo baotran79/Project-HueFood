@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<div class="main">
+    <div class="background">
+        <div class="content">
+            <div class="intro-form">
+                <h1>Web Oder & <br><span>Introducing Hue Cuisine</span></h1>
+                <p class="par">
+                    Trong kho tàng ẩm thực Việt Nam với khoảng 1.700 món,
+                    Huế chiếm đến hơn 1.300 món, trải rộng trên các dòng ẩm thực chính như:
+                    món chính, món phụ, bánh truyền thống, món chay, chè và đồ uống, với sự đa dạng từ ẩm thực cung đình tinh tế đến ẩm thực dân gian mộc mạc và chay thanh đạm.
+                </p>
+            </div>
+
+            <div class="login-form">
+                <h2>Đăng Nhập</h2>
+                <form>
+                    <!-- Nhãn cho trường Tên Đăng Nhập -->
+                    <label for="username">Tên Đăng Nhập:</label>
+                    <input type="text" id="username" name="username" required minlength="3" pattern="^(?=.*[a-zA-Z])[A-Za-z0-9_]+$" title="Tên đăng nhập phải có ít nhất một chữ cái và chỉ chứa chữ cái, số, dấu gạch dưới (_), không có khoảng trắng và không có kí tự đặc biệt." />
+                    <br>
+
+                    <!-- Nhãn cho trường Mật Khẩu -->
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" name="password" required pattern=".*\d.*\d.*" minlength="2" title="Mật khẩu phải có ít nhất 2 chữ số." />
+                    <br>
+
+                    <!-- Nút Đăng Nhập -->
+                    <button type="submit">Đăng Nhập</button>
+
+                    <!-- Liên kết đến phần Đăng Ký nếu người dùng chưa có tài khoản -->
+                    <div class="Description-Register">
+                        <p>Bạn chưa có tài khoản?</p>
+                        <a href="/Home/Register" id="registerLink">Đăng Ký</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

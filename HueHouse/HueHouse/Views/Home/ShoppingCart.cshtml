@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Giỏ Hàng";
+}
+
+<div class="container">
+    <div class="main">
+        <div class="shopping-empty">
+            <!-- Hình ảnh empty cart -->
+            <img src="~/Content/Images/empty_cart.jpg" alt="Giỏ hàng trống" class="empty-cart-img">
+
+            <!-- Thông báo -->
+            <p class="empty-cart-text">
+                Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng. Hãy dạo một vòng <strong>Thực Đơn</strong> để chọn sản phẩm yêu thích nhé.
+                <strong>Ẩm Thực Huế - HueHouse</strong> có nhiều món ngon lắm!
+            </p>
+
+            <!-- Button tiếp tục chọn món -->
+            <a href="@Url.Action("Product", "Home")" class="btn-continue">
+                Tiếp Tục Chọn Món
+            </a>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Register";
+}
+
+<div class="main">
+    <div class="background">
+        <div class="content">
+            <div class="intro-form">
+                <h1>Web Oder & <br><span>Introducing Hue Cuisine</span></h1>
+                <p class="par">
+                    Trong kho tàng ẩm thực Việt Nam với khoảng 1.700 món,
+                    Huế chiếm đến hơn 1.300 món, trải rộng trên các dòng ẩm thực chính như:
+                    món chính, món phụ, bánh truyền thống, món chay, chè và đồ uống, với sự đa dạng từ ẩm thực cung đình tinh tế đến ẩm thực dân gian mộc mạc và chay thanh đạm.
+                </p>
+            </div>
+
+            <div class="register-form">
+                <h2>Đăng Ký</h2>
+                <form>
+                    <!-- Nhãn cho thông tin cho người dùng -->
+                    <label for="fullname">Họ và Tên:</label>
+                    <input type="text" id="fullname" name="fullname" required minlength="3" pattern="^[A-Za-zÀ-ỹ\s]+$" title="Phải có ít nhất 3 kí tự, chỉ chấp nhận ký tự chữ và khoảng trắng, bao gồm tiếng Việt, không số và không ký tự đặc biệt." />
+                    <br>
+
+                    <!-- Nhãn cho trường giới tính sử dụng radio button -->
+                    <label for="gender">Giới Tính:</label>
+                    <span class="gender-options">
+                        <label for="male">Nam</label>
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="female">Nữ</label>
+                        <input type="radio" id="female" name="gender" value="female" required>
+                        <br>
+                    </span>
+
+                    <!-- Nhãn cho trường số điện thoại -->
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="tel" id="phone" name="phone" required pattern="^\d{10}$" title="Số điện thoại phải gồm 10 chữ số." />
+                    <br>
+
+                    <!-- Nhãn cho trường địa chỉ -->
+                    <label for="address">Địa Chỉ:</label>
+                    <input type="text" id="address" name="address" required pattern="^[A-Za-z0-9À-ỹ\s,.-]+$" title="Địa chỉ phải đầy đủ và viết tiếng Việt, có số và có thể có dấu phẩy và dấu gạch ngang." />
+                    <br>
+
+                    <!-- Nhãn cho trường email -->
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required title="Email phải có định dạng hợp lệ và không được chứa tiếng Việt hoặc khoảng trắng, phải có đuôi gmail.com hoặc yahoo.com." />
+                    <br>
+
+                    <!-- Nhãn cho trường Tên Đăng Nhập -->
+                    <label for="username">Tên Đăng Nhập:</label>
+                    <input type="text" id="username" name="username" required minlength="3" pattern="^(?=.*[a-zA-Z])[A-Za-z0-9_]+$" title="Tên đăng nhập phải có ít nhất một chữ cái và chỉ chứa chữ cái, số, dấu gạch dưới (_), không có khoảng trắng và không có kí tự đặc biệt." />
+                    <br>
+
+                    <!-- Nhãn cho trường Mật Khẩu -->
+                    <label for="password">Mật khẩu:</label>
+                    <input type="password" id="password" name="password" required pattern=".*\d.*\d.*" minlength="2" title="Mật khẩu phải có ít nhất 2 chữ số." />
+                    <br>
+
+                    <!-- Nút Đăng Nhập -->
+                    <button type="submit">Đăng Ký</button>
+
+                    <!-- Liên kết đến phần đăng nhập nếu người dùng đã có tài khoản -->
+                    <div class="Description-Login">
+                        <p>Bạn đã có tài khoản?</p>
+                        <a href="/Home/Login" id="loginLink">Đăng Nhập</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

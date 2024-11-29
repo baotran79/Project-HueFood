@@ -1,0 +1,790 @@
+﻿/*Design Layout */
+/* Ngăn chặn cuộn ngang */
+body, html {
+    overflow-x: hidden; /* Ngừng cuộn ngang khi nội dung vượt quá chiều rộng của cửa sổ trình duyệt */
+    width: 100%; /* Đặt chiều rộng của body và html bằng 100% chiều rộng cửa sổ trình duyệt */
+    height: 100%; /* Đặt chiều cao của body và html bằng 100% chiều cao cửa sổ trình duyệt */
+    margin: 0; /* Loại bỏ khoảng cách mặc định xung quanh body và html */
+}
+
+
+/* Main content */
+.main {
+    flex-grow: 1; /* Phần main sẽ chiếm toàn bộ không gian còn lại giữa header và footer */
+    box-sizing: border-box;
+}
+
+
+/* Container tổng thể */
+.container {
+    display: flex;
+    flex-direction: column; /* Sắp xếp các phần tử theo cột: header, main, footer */
+    min-height: 100vh; /* Đảm bảo chiều cao tối thiểu của body là 100% chiều cao màn hình */
+    margin: 0; /* Xóa margin mặc định */
+}
+
+
+    /* Tổng thể Header */
+    .header-section {
+        width: 100%; /* Tuân theo chiều rộng container */
+        padding: 15px 35px; /* Thêm khoảng cách trong */
+        background-color: #333;
+        box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến chiều rộng */
+    }
+
+
+        /* Header Top */
+        .header-top {
+            display: flex;
+            justify-content: space-between; /* Đặt site-name bên trái và menu-right bên phải */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            margin-bottom: 10px; /* Khoảng cách với đường kẻ ngang */
+        }
+
+
+            /* Container cho logo và tiêu đề */
+            .site-branding {
+                display: flex;
+                align-items: center; /* Căn giữa logo và tiêu đề theo chiều dọc */
+                gap: 10px; /* Khoảng cách giữa logo và tiêu đề */
+            }
+
+
+                /* Logo của trang */
+                .site-logo {
+                    width: 50px; /* Chiều rộng logo */
+                    height: 50px; /* Chiều cao logo */
+                    object-fit: cover; /* Đảm bảo logo không bị méo */
+                    border-radius: 50%; /* Nếu muốn logo hình tròn, dùng thuộc tính này */
+                }
+
+
+                    /* Site Name */
+                    .site-name {
+                        font-size: 1.8rem; /* Kích thước chữ tiêu đề */
+                        font-weight: bold;
+                        color: #ff6600;
+                        margin: 0; /* Xóa khoảng cách mặc định của tiêu đề */
+}
+
+
+                        /* Menu Right */
+                        .menu-right {
+                            display: flex; /* Đặt các phần tử trong menu-right thành hàng ngang */
+                            align-items: center; /* Căn giữa các phần tử theo trục dọc */
+                        }
+
+                            /* Danh sách (ul) trong menu-right */
+                            .menu-right ul {
+                                display: flex; /* Đặt các mục con (li) nằm ngang */
+                                justify-content: flex-end; /* Căn các mục con về phía bên phải */
+                                list-style: none; /* Loại bỏ dấu chấm hoặc ký hiệu mặc định của danh sách */
+                                margin: 0; /* Loại bỏ khoảng cách ngoài */
+                                padding: 0; /* Loại bỏ khoảng cách trong */
+                                align-items: center; /* Căn giữa các mục con theo trục dọc */
+                            }
+
+                            /* Các mục con (li) trong menu-right */
+                            .menu-right li {
+                                margin-left: 15px; /* Tạo khoảng cách giữa các mục */
+                                font-size: 17px; /* Kích thước chữ */
+                                font-weight: bold; /* Chữ in đậm */
+                                font-family: 'Times New Roman'; /* Sử dụng font Times New Roman */
+                            }
+
+                                /* Liên kết (a) bên trong các mục con */
+                                .menu-right li a {
+                                    text-decoration: none; /* Loại bỏ gạch chân khỏi liên kết */
+                                    color: #fff; /* Màu trắng cho chữ */
+                                    transition: color 0.3s ease-in-out; /* Hiệu ứng chuyển đổi màu khi hover */
+                                    font-size: 17px; /* Kích thước chữ */
+                                    font-weight: bold; /* Chữ in đậm */
+                                    font-family: 'Times New Roman'; /* Font Times New Roman */
+                                }
+
+                                    /* Hiệu ứng hover cho liên kết */
+                                    .menu-right li a:hover {
+                                        color: #ff6600; /* Đổi sang màu cam khi hover */
+                                    }
+
+
+                        /* Thanh tìm kiếm */
+                        .search-container {
+                            position: relative; /* Đặt vị trí của container cho phép các phần tử con có thể căn chỉnh */
+                            display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử trong cùng một hàng */
+                            align-items: center; /* Căn giữa các phần tử trong search container theo chiều dọc */
+                        }
+
+                            .search-box {
+                                padding: 8px 12px; /* Khoảng cách bên trong ô tìm kiếm */
+                                border: none; /* Loại bỏ viền mặc định của ô tìm kiếm */
+                                border-radius: 20px; /* Tạo viền bo tròn cho ô tìm kiếm */
+                                width: 220px; /* Đặt chiều rộng của ô tìm kiếm */
+                                font-size: 14px; /* Kích thước chữ trong ô tìm kiếm */
+                                font-family: 'Times New Roman'; /* Chọn font chữ cho ô tìm kiếm */
+                            }
+
+                            /* Hiệu ứng khi hover vào thanh tìm kiếm */
+                            .search-box:focus {
+                                outline: none; /* Loại bỏ viền khi ô tìm kiếm được chọn */
+                                box-shadow: 0 0 5px 1px rgb(228, 97, 9); /* Thêm hiệu ứng đổ bóng màu cam khi ô tìm kiếm được focus */
+                            }
+
+
+                        /* Cải thiện hiển thị của dropdown */
+                        .menu-item {
+                            position: relative; /* Đặt vị trí của dropdown liên quan đến menu-item (cha) để đảm bảo hiển thị đúng vị trí */
+                        }
+
+                            /* Thêm hiệu ứng hover cho phần tử Tài Khoản - Hướng Dẫn */
+                            .menu-item .menu-link {
+                                cursor: pointer; /* Khi người dùng rê chuột vào, hiển thị con trỏ hình bàn tay để cho biết có thể click hoặc hover */
+                            }
+
+                            /* Hiển thị dropdown khi hover vào Tài Khoản */
+                            .menu-item:hover .dropdown-account {
+                                display: block; /* Làm dropdown hiển thị khi rê chuột vào phần tử menu-item */
+                            }
+
+                            /* Hiển thị dropdown khi hover vào Hướng Dẫn */
+                            .menu-item:hover .dropdown-instruction {
+                                display: block; /* Làm dropdown hiển thị khi rê chuột vào phần tử menu-item */
+                            }
+
+                        /* Thêm kiểu chữ và màu sắc cho Tài Khoản */
+                        .menu-link {
+                            color: #fff; /* Màu chữ trắng */
+                            font-family: 'Times New Roman'; /* Font chữ là Times New Roman */
+                            font-weight: bold; /* Chữ được in đậm */
+                            font-size: 17px; /* Kích thước chữ 17px */
+                        }
+
+
+                        /* Dropdown Account (Tài Khoản) */
+                        /* Định dạng tổng thể cho dropdown account */
+                        .dropdown-account {
+                            display: none; /* Dropdown bị ẩn mặc định, chỉ hiện khi người dùng tương tác */
+                            position: absolute; /* Đặt vị trí của dropdown tương đối với phần tử cha */
+                            background-color: grey; /* Màu nền của dropdown là màu xám */
+                            min-width: 113px; /* Chiều rộng tối thiểu của dropdown là 113px */
+                            z-index: 1; /* Giúp dropdown nằm trên các phần tử khác (ưu tiên hiển thị) */
+                            padding: 10px 0; /* Thêm khoảng cách trên và dưới bên trong dropdown */
+                        }
+
+                            /* Các liên kết (link) bên trong dropdown */
+                            .dropdown-account a {
+                                color: #f8f8f8; /* Màu chữ sáng hơn (gần như trắng) */
+                                padding: 8px 12px; /* Khoảng cách trong mỗi mục dropdown (trên/dưới: 8px, trái/phải: 12px) */
+                                text-decoration: wavy; /* Loại bỏ gạch chân mặc định của liên kết */
+                                display: block; /* Mỗi liên kết chiếm toàn bộ chiều ngang của dropdown và xuống dòng riêng */
+                                font-size: 14px; /* Kích thước chữ của liên kết là 14px */
+                            }
+
+                                /* Hiệu ứng hover cho các liên kết bên trong dropdown */
+                                .dropdown-account a:hover {
+                                    background-color: rgba(255, 69, 0, 0.1); /* Khi hover, màu nền chuyển sang màu cam nhạt với độ mờ 0.1 */
+                                }
+
+
+                        /* Dropdown */
+                        /* Định dạng chung cho phần dropdown nằm trong phần menu bên phải */
+                        .menu-right .dropdown-account {
+                            display: none; /* Mặc định ẩn dropdown */
+                            position: absolute; /* Định vị tuyệt đối so với phần tử chứa nó (parent) */
+                            background-color: #333; /* Màu nền xám đậm cho dropdown */
+                            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Tạo hiệu ứng đổ bóng cho dropdown */
+                            z-index: 1; /* Đảm bảo dropdown nằm trên các phần tử khác */
+                            padding: 10px 0; /* Thêm khoảng cách dọc bên trong (trên và dưới) */
+                            border-radius: 4px; /* Bo góc nhẹ cho dropdown */
+                        }
+
+                            /* Hiển thị dropdown khi hover vào phần tử menu cha */
+                            .menu-right .menu-item:hover .dropdown-account {
+                                display: block; /* Hiển thị dropdown khi người dùng hover vào menu-item */
+                            }
+
+                                /* Định dạng chung cho các liên kết (link) bên trong dropdown */
+                                .menu-right .dropdown-account a {
+                                    text-decoration: none; /* Loại bỏ gạch chân mặc định của liên kết */
+                                    color: #fff; /* Màu chữ trắng */
+                                    padding: 8px 15px; /* Thêm khoảng cách bên trong cho liên kết (top/bottom: 8px, left/right: 15px) */
+                                    display: block; /* Mỗi liên kết hiển thị như một block, chiếm toàn bộ chiều rộng của dropdown */
+                                    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Hiệu ứng mượt khi đổi màu nền và màu chữ */
+                                }
+
+                                    /* Hiệu ứng khi hover vào liên kết */
+                                    .menu-right .dropdown-account a:hover {
+                                        background-color: #444; /* Màu nền chuyển sang xám đậm hơn */
+                                        color: #ff6600; /* Màu chữ đổi sang cam khi hover */
+                                    }
+
+
+    /* Đường Kẻ Ngang */
+    .header-divider {
+        border: 2px;
+        height: 2px;
+        background-color: #ff6600; /* Màu của đường kẻ */
+        margin: 5px 0; /* Tạo khoảng cách trên/dưới */
+    }
+
+
+    /* Navbar Left */
+    .navbar-left {
+        margin-top: 15px; /* Khoảng cách với đường kẻ ngang */
+        text-align: center; /* Căn menu về bên trái */
+        padding: 5px 0px; /* Khoảng cách hai bên */
+        box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến kích thước */
+    }
+
+        .navbar-left ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap; /* Đảm bảo không tràn ra ngoài trên màn hình nhỏ */
+        }
+
+        .navbar-left li {
+            margin-right: 70px;
+            font-size: 17px;
+            font-weight: bold;
+            font-family: 'Times New Roman';
+        }
+
+            .navbar-left li a {
+                text-decoration: none;
+                color: #fff; /* Màu trắng */
+                transition: color 0.3s ease-in-out; /* Hiệu ứng hover */
+                font-size: 17px;
+                font-weight: bold;
+                font-family: 'Times New Roman';
+            }
+
+                .navbar-left li a:hover {
+                    color: #ff6600; /* Màu cam khi hover */
+                }
+
+
+        /* Dropdown Instruction (Hướng Dẫn) */
+        /* Định dạng tổng thể cho dropdown instruction */
+        .dropdown-instruction {
+            display: none; /* Dropdown bị ẩn mặc định, chỉ hiện khi người dùng tương tác */
+            position: absolute; /* Đặt vị trí của dropdown tương đối với phần tử cha */
+            background-color: grey; /* Màu nền của dropdown là màu xám */
+            min-width: 188px; /* Chiều rộng tối thiểu của dropdown là 150px */
+            z-index: 1; /* Giúp dropdown nằm trên các phần tử khác (ưu tiên hiển thị) */
+        }
+
+            /* Các liên kết (link) bên trong dropdown */
+            .dropdown-instruction a {
+                color: #f8f8f8; /* Màu chữ sáng hơn (gần như trắng) */
+                display: block; /* Mỗi liên kết chiếm toàn bộ chiều ngang của dropdown và xuống dòng riêng */
+                font-size: 14px; /* Kích thước chữ của liên kết là 14px */
+            }
+
+                /* Hiệu ứng hover cho các liên kết bên trong dropdown */
+                .dropdown-instruction a:hover {
+                    background-color: rgba(255, 69, 0, 0.1); /* Khi hover, màu nền chuyển sang màu cam nhạt với độ mờ 0.1 */
+                }
+
+
+        /* Dropdown */
+        /* Định dạng chung cho dropdown instruction */
+        .navbar-left .dropdown-instruction {
+            display: none; /* Mặc định ẩn dropdown */
+            position: absolute; /* Định vị tuyệt đối so với phần tử cha */
+            background-color: #333; /* Màu nền xám đậm */
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Hiệu ứng đổ bóng */
+            z-index: 2; /* Ưu tiên hiển thị trên các phần tử khác */
+            padding: 10px 5px;
+            border-radius: 4px; /* Bo góc nhẹ */
+        }
+
+            /* Hiển thị dropdown khi hover vào phần tử menu cha */
+            .navbar-left .menu-item:hover .dropdown-instruction {
+                display: block; /* Hiển thị dropdown khi người dùng hover vào menu-item */
+            }
+
+                /* Định dạng các liên kết bên trong dropdown */
+                .navbar-left .dropdown-instruction a {
+                    text-decoration: none; /* Loại bỏ gạch chân */
+                    color: #fff; /* Màu chữ trắng */
+                    padding: 12px 5px; /* Khoảng cách trong: đều ở trên, dưới, trái và phải */
+                    display: flex; /* Sử dụng flexbox để canh giữa nội dung */
+                    justify-content: flex-start; /* Canh trái nội dung */
+                    align-items: center; /* Canh giữa theo chiều dọc */
+                    width: auto; /* Độ rộng của mỗi liên kết tự động theo nội dung */
+                    border-bottom: 1px solid #ccc; /* Đường kẻ ngang */
+                    margin: 0 auto; /* Canh giữa toàn bộ dropdown */
+                    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Hiệu ứng mượt khi hover */
+                }
+
+                    /* Loại bỏ đường kẻ dưới liên kết cuối cùng */
+                    .navbar-left .dropdown-instruction a:last-child {
+                        border-bottom: none;
+                    }
+
+                    /* Hiệu ứng hover */
+                    .navbar-left .dropdown-instruction a:hover {
+                        background-color: #444; /* Màu nền khi hover */
+                        color: #ff6600; /* Màu chữ khi hover */
+                    }
+
+
+/* CSS cho khung hình bên dưới Header */
+.banner {
+    width: 80%;
+    height: 400px;
+    margin-top: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 50%), url("../Content/Images/banner.jpg");
+    background-size: cover; /* Đảm bảo ảnh bao phủ toàn bộ vùng banner */
+    background-repeat: no-repeat; /* Ngăn ảnh bị lặp lại */
+    background-position: center; /* Căn giữa ảnh */
+    position: relative;
+    display: flex;
+    padding: 18px 181px;
+}
+
+        .banner .box-form {
+            width: 50%;
+        }
+
+            .banner .box-form h2 {
+                font-size: 50px;
+                font-family: 'Times New Roman';
+                font-weight: bold;
+                margin-top: 100px;
+                color: #ffffff; /* Chữ trắng nổi bật */
+                text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Bóng chữ đen */
+            }
+
+            .banner .box-form p {
+                color: #ffffff; /* Chữ trắng sáng */
+                text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Bóng chữ nhẹ hơn */
+                font-size: 20px;
+                font-family: 'Times New Roman';
+            }
+
+
+    /* Footer Styles - Mục cuối của trang web */
+    footer {
+        background-color: #333; /* Màu nền của footer */
+        color: #fff; /* Màu chữ của footer */
+        padding: 20px 0; /* Thêm khoảng cách trong */
+        text-align: left;
+    }
+
+        .footer-content {
+            display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử */
+            justify-content: space-between; /* Căn giữa các phần tử trong footer */
+            align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+            max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+            margin: 0 auto; /* Căn giữa toàn bộ footer */
+            padding: 0 20px; /* Padding vào các cạnh trái phải */
+        }
+
+            .footer-content .contact-info {
+                width: 36%; /* Độ rộng của Địa Chỉ */
+            }
+
+                .footer-content .contact-info h3 {
+                    font-size: 20px; /* Kích thước font chữ của tiêu đề */
+                    margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+                }
+
+                .footer-content .contact-info p {
+                    font-size: 14px; /* Kích thước font chữ của thông tin liên lạc */
+                    margin-bottom: 10px; /* Khoảng cách giữa các dòng */
+                }
+
+            .footer-content .social-media {
+                width: 45%; /* Chiếm 45% chiều rộng của footer */
+                text-align: right; /* Căn phải cho phần social media */
+            }
+
+                .footer-content .social-media h3 {
+                    font-size: 20px; /* Kích thước font chữ của tiêu đề */
+                    margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+                }
+
+                .footer-content .social-media a {
+                    display: block; /* Hiển thị các liên kết dưới dạng khối */
+                    color: #fff; /* Màu chữ của các liên kết */
+                    font-size: 16px; /* Kích thước font chữ của các liên kết */
+                    margin-bottom: 10px; /* Khoảng cách giữa các liên kết */
+                    text-decoration: none; /* Loại bỏ gạch dưới */
+                    transition: color 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
+                }
+
+                    .footer-content .social-media a:hover {
+                        color: rgb(228, 97, 9); /* Đổi màu chữ khi hover */
+                    }
+
+            .footer-bottom {
+                text-align: center; /* Căn giữa phần dưới footer */
+                padding: 10px 0; /* Padding cho phần dưới footer */
+                background-color: #222; /* Màu nền của phần dưới footer */
+            }
+
+                .footer-bottom p {
+                    font-size: 14px; /* Kích thước font chữ */
+                    margin: 0; /* Loại bỏ margin */
+                }
+
+
+
+/* Design Trang Chủ */
+/* Tiêu đề của trang home */
+.best-seller {
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-top: 10px; /* Khoảng cách phía trên */
+    margin-bottom: -180px; /* Khoảng cách phía dưới */
+}
+
+    .best-seller h1 {
+        font-size: 2.5em; /* Kích thước chữ, điều chỉnh tùy ý */
+        font-weight: bold; /* Tạo độ đậm cho chữ */
+        color: #ff6600; /* Màu chữ */
+    }
+
+
+/* Phần sản phẩm */
+.product-list {
+    display: grid; /* Dùng grid để hiển thị sản phẩm theo dạng lưới */
+    grid-template-columns: repeat(4, 1fr); /* Hiển thị 3 cột sản phẩm đều nhau */
+    gap: 50px; /* Khoảng cách giữa các sản phẩm */
+    padding: 200px; /* Padding cho phần sản phẩm */
+}
+
+    /* Thiết lập cho từng sản phẩm */
+    .product-item {
+        text-align: center; /* Căn giữa nội dung trong sản phẩm */
+        cursor: pointer; /* Con trỏ chuột sẽ thay đổi khi di chuột vào sản phẩm */
+        background-color: white; /* Màu nền trắng */
+        border: 2px solid #8B5E3C; /* Màu viền nâu đất */
+        border-radius: 10px; /* Bo tròn các góc */
+        overflow: hidden; /* Ẩn phần thừa của nội dung */
+        transition: transform 0.3s ease-in-out; /* Thêm hiệu ứng khi hover */
+    }
+
+        .product-item:hover {
+            transform: scale(1.05); /* Phóng to sản phẩm khi hover */
+        }
+
+        .product-item img {
+            width: 100%; /* Ảnh chiếm toàn bộ chiều rộng của container */
+            height: 200px; /* Chiều cao cố định cho ảnh */
+            object-fit: cover; /* Đảm bảo ảnh không bị méo */
+        }
+
+        .product-item h3 {
+            margin-top: 10px; /* Khoảng cách trên tiêu đề của sản phẩm */
+            font-size: 18px; /* Kích thước chữ */
+            color: #333; /* Màu chữ */
+        }
+
+        .product-item p {
+            font-size: 14px; /* Kích thước chữ mô tả */
+            color: #777; /* Màu chữ nhạt */
+            margin: 5px 0; /* Khoảng cách giữa các đoạn văn */
+        }
+
+        .product-item .price {
+            font-size: 16px; /* Kích thước chữ giá */
+            font-weight: bold; /* Làm đậm giá */
+            color: #8B5E3C; /* Màu nâu đất cho giá */
+        }
+
+
+
+/* Design Đăng Nhập */
+/* Nền của trang đăng nhập */
+.background {
+    position: relative;
+    width: 100%;
+    height: 800px;
+    background-image: url("../Content/Images/background.jpg");
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    /* Lớp phủ trên ảnh nền */
+    .background::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7); /* Tăng độ tối lớp phủ */
+        z-index: 1; /* Đảm bảo overlay nằm trên ảnh */
+    }
+
+
+    .content {
+        width: 100%;
+        height: 200px;
+        margin-left: 130px;
+        position: relative;
+        z-index: 2; /* Đặt trên lớp overlay */
+    }
+
+        .content h1 {
+            font-family: 'Times new Roman';
+            font-size: 50px;
+            font-weight: bold;
+            margin-top: -40px;
+            letter-spacing: 2px;
+            color: #ffffff; /* Chữ trắng */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.8); /* Hiệu ứng bóng chữ */
+        }
+
+        .content .par {
+            width: 45%;
+            font-family: 'Times New Roman';
+            font-size: 22px; /* Tăng kích thước chữ */
+            letter-spacing: 1.5px; /* Tăng khoảng cách giữa các chữ */
+            line-height: 32px; /* Tăng chiều cao dòng */
+            color: #F5DEB3; /* Beige nâu đất */
+        }
+
+        
+
+    .content span {
+        color: rgb(228, 97, 9);
+    }
+
+
+
+/* Phong cách tổng thể cho form Đăng Nhập */
+.login-form {
+    width: 30%; /* Đặt độ rộng của form */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Nền trắng mờ */
+    border-radius: 15px; /* Bo góc */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+    z-index: 2; /* Đặt trên overlay */
+    position: absolute;
+    top: 85%; /* Căn giữa theo chiều dọc */
+    right: 9%; /* Đặt cách mép phải 9% */
+    transform: translateY(-60%); /* Điều chỉnh để form nằm chính giữa chiều dọc */
+}
+
+    /* Tiêu đề Đăng Nhập */
+    .login-form h2 {
+        font-size: 24px;
+        font-family: 'Times New Roman';
+        font-weight: bold;
+        color: #333; /* Chữ đen đậm */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Trường nhập liệu */
+    .login-form input[type="text"],
+    .login-form input[type="password"] {
+        width: calc(100% - 20px); /* Đặt độ rộng 100% trừ khoảng cách padding */
+        padding: 8px;
+        margin: 8px 0;
+        border: 2px solid #ccc; /* Viền xám nhạt */
+        border-radius: 10px; /* Bo góc nhẹ */
+        font-size: 16px;
+    }
+
+        /* Tạo hiệu ứng khi focus vào ô nhập */
+        .login-form input:focus {
+            outline: none;
+            border-color: #007bff; /* Viền đổi sang màu xanh lam khi focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+    /* Nút Đăng Nhập */
+    .login-form button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #007bff; /* Màu xanh lam */
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        /* Hiệu ứng hover cho nút */
+        .login-form button:hover {
+            background-color: #0056b3; /* Xanh đậm hơn */
+        }
+
+    /* Liên kết Đăng Ký */
+    .Description-Register {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+    }
+
+        .Description-Register a {
+            color: #007bff;
+            text-decoration: none; /* Bỏ gạch chân */
+            font-weight: bold;
+        }
+
+            /* Hiệu ứng hover cho liên kết */
+            .Description-Register a:hover {
+                text-decoration: underline;
+            }
+
+
+
+/* Phong cách tổng thể cho form Đăng Ký */
+.register-form {
+    width: 30%; /* Đặt độ rộng của form */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9); /* Nền trắng mờ */
+    border-radius: 15px; /* Bo góc */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Đổ bóng */
+    z-index: 2; /* Đặt trên overlay */
+    position: absolute;
+    top: 50%; /* Căn giữa theo chiều dọc */
+    right: 9%; /* Đặt cách mép phải 9% */
+    transform: translateY(-50%); /* Điều chỉnh để form nằm chính giữa chiều dọc */
+}
+
+    /* Tiêu đề Đăng Nhập */
+    .register-form h2 {
+        font-size: 24px;
+        font-family: 'Times New Roman';
+        font-weight: bold;
+        color: #333; /* Chữ đen đậm */
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    /* Trường nhập liệu */
+    .register-form input[type="text"],
+    .register-form input[type="tel"],
+    .register-form input[type="email"],
+    .register-form input[type="password"] {
+        width: calc(100% - 20px); /* Đặt độ rộng 100% trừ khoảng cách padding */
+        padding: 8px;
+        margin: 8px 0;
+        border: 2px solid #ccc; /* Viền xám nhạt */
+        border-radius: 10px; /* Bo góc nhẹ */
+        font-size: 16px;
+    }
+
+        /* Tạo hiệu ứng khi focus vào ô nhập */
+        .register-form input:focus {
+            outline: none;
+            border-color: #007bff; /* Viền đổi sang màu xanh lam khi focus */
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+    .register-form input[type="radio"] {
+        width: 100%;
+        margin-right: 140px;
+        transform: scale(2.0); /* Phóng to radio button */
+    }
+
+    /* Phần radio buttons của giới tính */
+    .gender-options {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center; /* Căn giữa radio và label */
+    }
+
+        /* Thêm style cho các label của radio */
+        .gender-options label {
+            font-size: 16px;
+            color: black;
+            padding: 25px;
+        }
+
+    /* Nút Đăng Nhập */
+    .register-form button {
+        width: 100%;
+        margin-top: 15px;
+        padding: 10px;
+        background-color: #007bff; /* Màu xanh lam */
+        border: none;
+        border-radius: 10px;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+        /* Hiệu ứng hover cho nút */
+        .register-form button:hover {
+            background-color: #0056b3; /* Xanh đậm hơn */
+        }
+
+    /* Liên kết Đăng Ký */
+    .Description-Login {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+    }
+
+        .Description-Login a {
+            color: #007bff;
+            text-decoration: none; /* Bỏ gạch chân */
+            font-weight: bold;
+        }
+
+            /* Hiệu ứng hover cho liên kết */
+            .Description-Login a:hover {
+                text-decoration: underline;
+            }
+
+
+/* Giỏ Hàng */
+/* Phong cách cho giỏ hàng trống */
+.shopping-empty {
+    text-align: center;
+    max-width: 800px; /* Đặt chiều rộng tối đa */
+    width: 100%; /* Đảm bảo phần tử chiếm toàn bộ chiều rộng khi cần */
+    margin-top: 12%;
+    margin-left: 22%;
+    box-sizing: border-box;
+}
+
+/* Hình ảnh giỏ hàng trống */
+.empty-cart-img {
+    max-width: 300px;
+    width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+/* Thông báo giỏ hàng trống */
+.empty-cart-text {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 20px;
+    line-height: 1.6;
+}
+
+/* Nút tiếp tục chọn món */
+.btn-continue {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #007BFF;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+    .btn-continue:hover {
+        background-color: #0056b3;
+    }

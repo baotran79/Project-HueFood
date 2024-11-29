@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ẩm Thực Huế - HueHouse</title>
+    <link rel="stylesheet" href="~/Content/main.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <header class="header-section">
+            <!-- Phần trên: Site name và menu-right -->
+            <div class="header-top">
+                <div class="site-branding">
+                    <img src="~/Content/Images/am_thuc_hue.jpg" alt="Logo HueHouse" class="site-logo">
+                    <h2 class="site-name">Ẩm Thực Huế - HueHouse</h2>
+                </div>
+                <div class="menu-right">
+                    <ul>
+                        <li class="search-container">
+                            <input type="text" placeholder="Tìm kiếm..." class="search-box">
+                        </li>
+                        <li class="menu-item">
+                            <span class="menu-link">Tài Khoản</span>
+                            <div class="dropdown-account">
+                                <a href="@Url.Action("Login", "Home")">Đăng Nhập</a>
+                                <a href="@Url.Action("Register", "Home")">Đăng Ký</a>
+                            </div>
+                        </li>
+                        <li><a href="@Url.Action("ShoppingCart", "Home")">Giỏ Hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Đường kẻ ngang -->
+            <hr class="header-divider">
+
+            <!-- Phần dưới: Menu-left -->
+            <nav class="navbar-left">
+                <ul>
+                    <li><a href="@Url.Action("Index", "Home")">Trang Chủ</a></li>
+                    <li><a href="@Url.Action("Product", "Home")">Thực Đơn</a></li>
+                    <li class="menu-item">
+                        <span class="menu-link">Hướng Dẫn</span>
+                        <div class="dropdown-instruction">
+                            <a href="@Url.Action("Order_Instructions", "Home")">Hướng Dẫn Đặt Hàng</a>
+                            <a href="@Url.Action("Payment_Instructions", "Home")">Hướng Dẫn Thanh Toán</a>
+                        </div>
+                    </li>
+                    <li><a href="@Url.Action("About", "Home")">Giới Thiệu</a></li>
+                    <li><a href="@Url.Action("Contact", "Home")">Liên Hệ</a></li>
+                </ul>
+            </nav>
+        </header>
+
+
+        <!-- Main Section -->
+        <main class="main-section">
+            @RenderBody()
+        </main>
+
+        <!-- Footer Section -->
+        <footer class="footer-section">
+            <div class="footer-content">
+                <div class="contact-info">
+                    <h3>Liên Hệ</h3>
+                    <p><strong>Địa chỉ:</strong> 5/11c Lê Quý Đôn, Phường 11, Quận Phú Nhuận - Tp.Hồ Chí Minh</p>
+                    <p><strong>Điện thoại:</strong> (+84) - 987 - 910 - 320</p>
+                    <p><strong>Email:</strong> HueHouse511@gmail.com</p>
+                </div>
+                <div class="social-media">
+                    <h3>Theo Dõi Chúng Tôi</h3>
+                    <a href="https://www.facebook.com/amthuchuethuong75?locale=vi_VN" target="_blank">
+                        <ion-icon name="logo-facebook"></ion-icon> Facebook
+                    </a>
+                    <a href="https://www.youtube.com/channel/UCS6SuDQOvWQcpPdPMrgq_Zg" target="_blank">
+                        <ion-icon name="logo-youtube"></ion-icon> Youtube
+                    </a>
+                    <a href="https://www.instagram.com/foodyhue_amthuchue/" target="_blank">
+                        <ion-icon name="logo-instagram"></ion-icon> Instagram
+                    </a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 HueHouse. All rights reserved.</p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>
