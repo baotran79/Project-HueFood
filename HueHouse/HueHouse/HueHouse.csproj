@@ -45,10 +45,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -124,6 +132,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Admin.cs" />
+    <Compile Include="Models\AdminManagement.cs" />
+    <Compile Include="Models\Cart.cs" />
+    <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\FoodItem.cs" />
+    <Compile Include="Models\HighlightedProducts.cs" />
+    <Compile Include="Models\huehousemodel.cs" />
+    <Compile Include="Models\OrderDetails.cs" />
+    <Compile Include="Models\OrderHistory.cs" />
+    <Compile Include="Models\Orders.cs" />
+    <Compile Include="Models\Payments.cs" />
+    <Compile Include="Models\ProductDetails.cs" />
+    <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\sysdiagrams.cs" />
+    <Compile Include="Models\UnifiedContactFeedback.cs" />
+    <Compile Include="Models\Users.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -133,32 +157,61 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\am_thuc_hue.jpg" />
     <Content Include="Content\Images\background.jpg" />
-    <Content Include="Content\Images\banh_beo.jpg" />
-    <Content Include="Content\Images\banh_bot_loc.jpg" />
-    <Content Include="Content\Images\banh_canh_cua.jpg" />
-    <Content Include="Content\Images\banh_khoai.jpg" />
-    <Content Include="Content\Images\banh_nam.jpg" />
-    <Content Include="Content\Images\banh_ram_it.jpg" />
-    <Content Include="Content\Images\banh_uot_thit_nuong.jpg" />
-    <Content Include="Content\Images\banner.jpg" />
-    <Content Include="Content\Images\bun-bo.jpg" />
-    <Content Include="Content\Images\bun_giam_nuoc.jpg" />
-    <Content Include="Content\Images\bun_hen.jpg" />
-    <Content Include="Content\Images\bun_nghe.jpg" />
-    <Content Include="Content\Images\bun_thit_nuong.jpg" />
-    <Content Include="Content\Images\chao_hen.jpg" />
-    <Content Include="Content\Images\che_ba_mau.jpg" />
-    <Content Include="Content\Images\che_hat_sen.jpg" />
-    <Content Include="Content\Images\com_hen.jpg" />
+    <Content Include="Content\Images\background_index.jpg" />
     <Content Include="Content\Images\empty_cart.jpg" />
-    <Content Include="Content\Images\mi_quang.jpg" />
-    <Content Include="Content\Images\nem.jpg" />
-    <Content Include="Content\Images\nem_lui.jpg" />
     <Content Include="Content\main.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\banh_beo.jpg" />
+    <Content Include="Images\banh_bot_loc.jpg" />
+    <Content Include="Images\banh_cam.jpg" />
+    <Content Include="Images\banh_canh_ca_loc.jpg" />
+    <Content Include="Images\banh_canh_cua.jpg" />
+    <Content Include="Images\banh_duc_chay.jpg" />
+    <Content Include="Images\banh_in.jpg" />
+    <Content Include="Images\banh_khoai.jpg" />
+    <Content Include="Images\banh_nam.jpg" />
+    <Content Include="Images\banh_phu_the.jpg" />
+    <Content Include="Images\banh_ram_it.jpg" />
+    <Content Include="Images\banh_to.jpg" />
+    <Content Include="Images\banh_uot_chay.jpg" />
+    <Content Include="Images\banh_uot_thit_nuong.jpg" />
+    <Content Include="Images\bun_bo.jpg" />
+    <Content Include="Images\bun_giam_nuoc.jpg" />
+    <Content Include="Images\bun_hen.jpg" />
+    <Content Include="Images\bun_nghe.jpg" />
+    <Content Include="Images\bun_thit_nuong.jpg" />
+    <Content Include="Images\cai_xao_nam.jpg" />
+    <Content Include="Images\ca_phao_mam_nem.jpg" />
+    <Content Include="Images\chao_chay.jpg" />
+    <Content Include="Images\chao_hen.jpg" />
+    <Content Include="Images\cha_hue.jpg" />
+    <Content Include="Images\cha_oc_la_lot.jpg" />
+    <Content Include="Images\cha_tom_nuong_la_lot.jpg" />
+    <Content Include="Images\che_bap.jpg" />
+    <Content Include="Images\che_ba_mau.jpg" />
+    <Content Include="Images\che_bot_loc_heo_quay.jpg" />
+    <Content Include="Images\che_dau_xanh_danh.jpg" />
+    <Content Include="Images\che_hat_sen.jpg" />
+    <Content Include="Images\com_ga_hue.jpg" />
+    <Content Include="Images\com_goi_la_sen.jpg" />
+    <Content Include="Images\com_hen.jpg" />
+    <Content Include="Images\com_tam_hue.jpg" />
+    <Content Include="Images\dua_mon_hue.jpg" />
+    <Content Include="Images\goi_mit_non_chay.jpg" />
+    <Content Include="Images\goi_xoai_tom_kho.jpg" />
+    <Content Include="Images\luon_om_chuoi_dau.jpg" />
+    <Content Include="Images\mi_quang.jpg" />
+    <Content Include="Images\nem.jpg" />
+    <Content Include="Images\nem_chay.jpg" />
+    <Content Include="Images\nem_lui.jpg" />
+    <Content Include="Images\ram_cuon_cai.jpg" />
+    <Content Include="Images\ruou_cung_dinh.jpg" />
+    <Content Include="Images\thit_luoc_mam_nem.jpg" />
+    <Content Include="Images\tra_thao_moc.jpg" />
+    <Content Include="Images\tre_hue.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
@@ -171,8 +224,11 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\main.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -192,10 +248,10 @@
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Order_Instructions.cshtml" />
+    <Content Include="Views\Home\My_Account.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

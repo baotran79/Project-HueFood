@@ -1,11 +1,55 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Liên Hệ & Góp Ý";
 }
+<div class="main">
+    <div class="contact-page">
+        <h1>LIÊN HỆ HOẶC GÓP Ý VỚI CHÚNG TÔI</h1>
 
-<div class="container">
-    <div class="main">
-        <div class="Contact">
-            <h1>Chưa có liên lạc</h1>
+        <!-- Thông tin liên hệ -->
+        <div class="contact-details">
+            <p>
+                Hotline: <strong>0973283431 | 0905207922</strong>
+            </p>
+            <p>
+                Email: <strong>huehouse511@gmail.com</strong>
+            </p>
+        </div>
+
+        <!-- Phần nội dung chính: Form + Map -->
+        <div class="contact-main">
+            <!-- Form chung -->
+            <div class="contact-form">
+                <h2>GỬI PHẢN HỒI ĐẾN CHÚNG TÔI</h2>
+                <form>
+                    <div class="form-group">
+                        <!-- Loại phản hồi -->
+                        <select name="contactType" required>
+                            <option value="Contact">Liên hệ</option>
+                            <option value="Feedback">Góp ý</option>
+                        </select>
+                        <!-- Họ tên -->
+                        <input type="text" name="fullName" placeholder="Nhập họ và tên của bạn..." required />
+                        <!-- Email -->
+                        <input type="email" name="email" placeholder="Nhập email của bạn..." required />
+                        <!-- Số điện thoại -->
+                        <input type="tel" name="phone" placeholder="Nhập số điện thoại của bạn..." required />
+                        <!-- Nội dung -->
+                        <textarea name="message" rows="4" placeholder="Nhập nội dung mà bạn muốn gửi..." required></textarea>
+                    </div>
+                    <button type="submit">Gửi thông tin</button>
+                </form>
+            </div>
+
+            <!-- Google Map -->
+            <div class="contact-map">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d979.8148392069804!2d106.67975556955028!3d10.791437116722896!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317528d4c16f9869%3A0xa4543a64a3d8ae96!2zNS8xMUMgxJAuIEzDqiBRdcO9IMSQw7RuLCBQaMaw4budbmcgMTQsIFBow7ogTmh14bqtbiwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1733200971360!5m2!1svi!2s"
+                        width="700"
+                        height="430"
+                        style="border:0;"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
         </div>
     </div>
 </div>

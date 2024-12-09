@@ -1,11 +1,49 @@
-﻿@{
+﻿@model IEnumerable<IGrouping<string, HueHouse.Models.Products>>
+
+@{
     ViewBag.Title = "Thực Đơn";
+
+    // Danh sách thứ tự các danh mục
+    var categoryOrder = new List<string> { "Món Chính", "Món Phụ", "Món Chay", "Bánh Truyền Thống", "Đồ Uống & Chè" };
+
+    // Sắp xếp các danh mục theo thứ tự đã cho
+    var orderedModel = Model.OrderBy(group => categoryOrder.IndexOf(group.Key)).ToList();
 }
 
-<div class="container">
-    <div class="main">
-        <div class="Product">
-            <h1>Thực đơn hiện đang trống</h1>
+<div class="main">
+    <div class="menu-container">
+        <h1>THỰC ĐƠN</h1>
+        <!-- Thanh danh mục -->
+        <div class="menu-categories">
+            <ul class="horizontal-menu">
+                @foreach (var category in orderedModel)
+                {
+                    <li data-category="@category.Key.ToLower().Replace(" ", "-")"
+                        class="@((orderedModel.First() == category) ? "active" : "")">
+                        @category.Key
+                    </li>
+                }
+            </ul>
+        </div>
+        <!-- Danh sách món ăn -->
+        <div class="menu-sections">
+            @foreach (var category in orderedModel)
+            {
+                <div class="menu-section" id="@category.Key.ToLower().Replace(" ", "-")"
+                     style="@((orderedModel.First() != category) ? "display:none;" : "")">
+                    <div class="food-items">
+                        @foreach (var product in category)
+                        {
+                            <div class="food-item">
+                                <!-- Đổi tên thẻ div thành 'food-item' ở đây -->
+                                <img src="/@product.ProductImage" alt="@product.ProductName" />
+                                <h3>@product.ProductName</h3>
+                                <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

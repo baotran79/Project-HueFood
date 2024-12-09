@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Login";
+    ViewBag.Title = "Đăng Nhập";
 }
 
 <div class="main">
@@ -10,22 +10,27 @@
                 <p class="par">
                     Trong kho tàng ẩm thực Việt Nam với khoảng 1.700 món,
                     Huế chiếm đến hơn 1.300 món, trải rộng trên các dòng ẩm thực chính như:
-                    món chính, món phụ, bánh truyền thống, món chay, chè và đồ uống, với sự đa dạng từ ẩm thực cung đình tinh tế đến ẩm thực dân gian mộc mạc và chay thanh đạm.
+                    Món Chính, Món Phụ, Món Chay, Bánh Truyền Thống, Đồ Uống & Chè, với sự đa dạng từ ẩm thực cung đình tinh tế đến ẩm thực dân gian mộc mạc và chay thanh đạm.
                 </p>
             </div>
 
             <div class="login-form">
                 <h2>Đăng Nhập</h2>
-                <form>
+                <form method="post" action="/Home/Login">
                     <!-- Nhãn cho trường Tên Đăng Nhập -->
                     <label for="username">Tên Đăng Nhập:</label>
-                    <input type="text" id="username" name="username" required minlength="3" pattern="^(?=.*[a-zA-Z])[A-Za-z0-9_]+$" title="Tên đăng nhập phải có ít nhất một chữ cái và chỉ chứa chữ cái, số, dấu gạch dưới (_), không có khoảng trắng và không có kí tự đặc biệt." />
+                    <input type="text" id="username" name="username" required />
                     <br>
 
                     <!-- Nhãn cho trường Mật Khẩu -->
                     <label for="password">Mật khẩu:</label>
-                    <input type="password" id="password" name="password" required pattern=".*\d.*\d.*" minlength="2" title="Mật khẩu phải có ít nhất 2 chữ số." />
+                    <input type="password" id="password" name="password" required />
                     <br>
+
+                    <!-- Thông Báo Lỗi -->
+                    <div class="error-message">
+                        @ViewBag.Message
+                    </div>
 
                     <!-- Nút Đăng Nhập -->
                     <button type="submit">Đăng Nhập</button>

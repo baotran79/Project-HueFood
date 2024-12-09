@@ -5,6 +5,9 @@ body, html {
     width: 100%; /* Đặt chiều rộng của body và html bằng 100% chiều rộng cửa sổ trình duyệt */
     height: 100%; /* Đặt chiều cao của body và html bằng 100% chiều cao cửa sổ trình duyệt */
     margin: 0; /* Loại bỏ khoảng cách mặc định xung quanh body và html */
+    scroll-behavior: smooth; /* Kích hoạt cuộn mượt */
+    font-family: 'Times New Roman';
+    background-color: #f4f4f4; /* Màu nền nhẹ nhàng */
 }
 
 
@@ -131,6 +134,70 @@ body, html {
                             }
 
 
+/* Khung tìm kiếm */
+.search-results-dropdown {
+    position: absolute;
+    top: 106%; /* Đặt ngay dưới thanh tìm kiếm */
+    left: 0;
+    width: 100%; /* Chiều rộng bằng với thanh tìm kiếm */
+    max-height: 350px; /* Giới hạn chiều cao của khung */
+    overflow-y: auto; /* Cuộn dọc nếu có quá nhiều kết quả */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    padding: 10px;
+    box-sizing: border-box; /* Đảm bảo padding không làm tăng kích thước */
+}
+
+/* Mỗi mục tìm kiếm */
+.search-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0; /* Khoảng cách đều giữa các mục */
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s;
+}
+
+    .search-item:hover {
+        background-color: #f9f9f9;
+    }
+
+/* Hình ảnh sản phẩm */
+.search-item-image {
+    width: 50px; /* Giảm kích thước hình ảnh */
+    height: 50px;
+    object-fit: cover; /* Giữ tỷ lệ hình ảnh mà không bị méo */
+    margin-right: 12px; /* Khoảng cách giữa hình ảnh và tên sản phẩm */
+    border-radius: 4px;
+}
+
+/* Tên sản phẩm */
+.search-item-text {
+    font-size: 14px; /* Kích thước chữ hợp lý */
+    font-weight: bold; /* Làm đậm tên sản phẩm */
+    color: #333;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    flex: 1; /* Chữ chiếm không gian còn lại */
+    margin-right: 10px; /* Khoảng cách giữa tên và giá */
+}
+
+/* Giá sản phẩm */
+.search-item-price {
+    font-size: 14px;
+    font-weight: bold;
+    color: #FF6F61; /* Màu sắc cho giá sản phẩm */
+    text-align: right;
+}
+
+/* Tối ưu hóa khoảng cách giữa các mục tìm kiếm */
+.search-item:last-child {
+    border-bottom: none; /* Loại bỏ đường viền dưới mục cuối cùng */
+}
+
+
                         /* Cải thiện hiển thị của dropdown */
                         .menu-item {
                             position: relative; /* Đặt vị trí của dropdown liên quan đến menu-item (cha) để đảm bảo hiển thị đúng vị trí */
@@ -146,6 +213,11 @@ body, html {
                                 display: block; /* Làm dropdown hiển thị khi rê chuột vào phần tử menu-item */
                             }
 
+                            /* Hiển thị dropdown khi hover vào Username */
+                            .menu-item:hover .dropdown-username {
+                                display: block; /* Làm dropdown hiển thị khi rê chuột vào phần tử menu-item */
+                            }
+
                             /* Hiển thị dropdown khi hover vào Hướng Dẫn */
                             .menu-item:hover .dropdown-instruction {
                                 display: block; /* Làm dropdown hiển thị khi rê chuột vào phần tử menu-item */
@@ -158,6 +230,65 @@ body, html {
                             font-weight: bold; /* Chữ được in đậm */
                             font-size: 17px; /* Kích thước chữ 17px */
                         }
+
+
+                        /* Dropdown Username (Tên người dùng) */
+                        /* Định dạng tổng thể cho dropdown username */
+                        .dropdown-username {
+                            display: none; /* Dropdown bị ẩn mặc định, chỉ hiện khi người dùng tương tác */
+                            position: absolute; /* Đặt vị trí của dropdown tương đối với phần tử cha */
+                            background-color: grey; /* Màu nền của dropdown là màu xám */
+                            min-width: 176px; /* Chiều rộng tối thiểu của dropdown là 176px */
+                            z-index: 1; /* Giúp dropdown nằm trên các phần tử khác (ưu tiên hiển thị) */
+                            padding: 10px 0; /* Thêm khoảng cách trên và dưới bên trong dropdown */
+                        }
+
+                            /* Các liên kết (link) bên trong dropdown */
+                            .dropdown-username a {
+                                color: #f8f8f8; /* Màu chữ sáng hơn (gần như trắng) */
+                                padding: 8px 12px; /* Khoảng cách trong mỗi mục dropdown (trên/dưới: 8px, trái/phải: 12px) */
+                                text-decoration: wavy; /* Loại bỏ gạch chân mặc định của liên kết */
+                                display: block; /* Mỗi liên kết chiếm toàn bộ chiều ngang của dropdown và xuống dòng riêng */
+                                font-size: 14px; /* Kích thước chữ của liên kết là 14px */
+                            }
+
+                                /* Hiệu ứng hover cho các liên kết bên trong dropdown */
+                                .dropdown-username a:hover {
+                                    background-color: rgba(255, 69, 0, 0.1); /* Khi hover, màu nền chuyển sang màu cam nhạt với độ mờ 0.1 */
+                                }
+
+
+                        /* Dropdown */
+                        /* Định dạng chung cho phần dropdown nằm trong phần menu bên phải */
+                        .menu-right .dropdown-username {
+                            display: none; /* Mặc định ẩn dropdown */
+                            position: absolute; /* Định vị tuyệt đối so với phần tử chứa nó (parent) */
+                            background-color: #333; /* Màu nền xám đậm cho dropdown */
+                            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* Tạo hiệu ứng đổ bóng cho dropdown */
+                            z-index: 1; /* Đảm bảo dropdown nằm trên các phần tử khác */
+                            padding: 10px 0; /* Thêm khoảng cách dọc bên trong (trên và dưới) */
+                            border-radius: 4px; /* Bo góc nhẹ cho dropdown */
+                        }
+
+                        /* Hiển thị dropdown khi hover vào phần tử menu cha */
+                        .menu-right .menu-item:hover .dropdown-username {
+                            display: block; /* Hiển thị dropdown khi người dùng hover vào menu-item */
+                        }
+
+                        /* Định dạng chung cho các liên kết (link) bên trong dropdown */
+                        .menu-right .dropdown-username a {
+                            text-decoration: none; /* Loại bỏ gạch chân mặc định của liên kết */
+                            color: #fff; /* Màu chữ trắng */
+                            padding: 8px 15px; /* Thêm khoảng cách bên trong cho liên kết (top/bottom: 8px, left/right: 15px) */
+                            display: block; /* Mỗi liên kết hiển thị như một block, chiếm toàn bộ chiều rộng của dropdown */
+                            transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out; /* Hiệu ứng mượt khi đổi màu nền và màu chữ */
+                        }
+
+                            /* Hiệu ứng khi hover vào liên kết */
+                            .menu-right .dropdown-username a:hover {
+                                background-color: #444; /* Màu nền chuyển sang xám đậm hơn */
+                                color: #ff6600; /* Màu chữ đổi sang cam khi hover */
+                            }
 
 
                         /* Dropdown Account (Tài Khoản) */
@@ -271,7 +402,7 @@ body, html {
             display: none; /* Dropdown bị ẩn mặc định, chỉ hiện khi người dùng tương tác */
             position: absolute; /* Đặt vị trí của dropdown tương đối với phần tử cha */
             background-color: grey; /* Màu nền của dropdown là màu xám */
-            min-width: 188px; /* Chiều rộng tối thiểu của dropdown là 150px */
+            min-width: 219px; /* Chiều rộng tối thiểu của dropdown là 219px */
             z-index: 1; /* Giúp dropdown nằm trên các phần tử khác (ưu tiên hiển thị) */
         }
 
@@ -332,11 +463,11 @@ body, html {
 
 
 /* CSS cho khung hình bên dưới Header */
-.banner {
+.background-index {
     width: 80%;
     height: 400px;
     margin-top: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 50%), url("../Content/Images/banner.jpg");
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.6) 50%), url("../Content/Images/background_index.jpg");
     background-size: cover; /* Đảm bảo ảnh bao phủ toàn bộ vùng banner */
     background-repeat: no-repeat; /* Ngăn ảnh bị lặp lại */
     background-position: center; /* Căn giữa ảnh */
@@ -345,11 +476,11 @@ body, html {
     padding: 18px 181px;
 }
 
-        .banner .box-form {
+        .background-index .box-form {
             width: 50%;
         }
 
-            .banner .box-form h2 {
+            .background-index .box-form h2 {
                 font-size: 50px;
                 font-family: 'Times New Roman';
                 font-weight: bold;
@@ -358,7 +489,7 @@ body, html {
                 text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* Bóng chữ đen */
             }
 
-            .banner .box-form p {
+            .background-index .box-form p {
                 color: #ffffff; /* Chữ trắng sáng */
                 text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Bóng chữ nhẹ hơn */
                 font-size: 20px;
@@ -366,141 +497,154 @@ body, html {
             }
 
 
-    /* Footer Styles - Mục cuối của trang web */
-    footer {
-        background-color: #333; /* Màu nền của footer */
-        color: #fff; /* Màu chữ của footer */
-        padding: 20px 0; /* Thêm khoảng cách trong */
-        text-align: left;
-    }
-
-        .footer-content {
-            display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử */
-            justify-content: space-between; /* Căn giữa các phần tử trong footer */
-            align-items: center; /* Căn giữa các phần tử theo chiều dọc */
-            max-width: 1200px; /* Giới hạn chiều rộng tối đa */
-            margin: 0 auto; /* Căn giữa toàn bộ footer */
-            padding: 0 20px; /* Padding vào các cạnh trái phải */
-        }
-
-            .footer-content .contact-info {
-                width: 36%; /* Độ rộng của Địa Chỉ */
-            }
-
-                .footer-content .contact-info h3 {
-                    font-size: 20px; /* Kích thước font chữ của tiêu đề */
-                    margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
-                }
-
-                .footer-content .contact-info p {
-                    font-size: 14px; /* Kích thước font chữ của thông tin liên lạc */
-                    margin-bottom: 10px; /* Khoảng cách giữa các dòng */
-                }
-
-            .footer-content .social-media {
-                width: 45%; /* Chiếm 45% chiều rộng của footer */
-                text-align: right; /* Căn phải cho phần social media */
-            }
-
-                .footer-content .social-media h3 {
-                    font-size: 20px; /* Kích thước font chữ của tiêu đề */
-                    margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
-                }
-
-                .footer-content .social-media a {
-                    display: block; /* Hiển thị các liên kết dưới dạng khối */
-                    color: #fff; /* Màu chữ của các liên kết */
-                    font-size: 16px; /* Kích thước font chữ của các liên kết */
-                    margin-bottom: 10px; /* Khoảng cách giữa các liên kết */
-                    text-decoration: none; /* Loại bỏ gạch dưới */
-                    transition: color 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
-                }
-
-                    .footer-content .social-media a:hover {
-                        color: rgb(228, 97, 9); /* Đổi màu chữ khi hover */
-                    }
-
-            .footer-bottom {
-                text-align: center; /* Căn giữa phần dưới footer */
-                padding: 10px 0; /* Padding cho phần dưới footer */
-                background-color: #222; /* Màu nền của phần dưới footer */
-            }
-
-                .footer-bottom p {
-                    font-size: 14px; /* Kích thước font chữ */
-                    margin: 0; /* Loại bỏ margin */
-                }
-
-
-
-/* Design Trang Chủ */
-/* Tiêu đề của trang home */
-.best-seller {
-    display: flex;
-    justify-content: center; /* Căn giữa theo chiều ngang */
-    align-items: center; /* Căn giữa theo chiều dọc */
-    margin-top: 10px; /* Khoảng cách phía trên */
-    margin-bottom: -180px; /* Khoảng cách phía dưới */
+/* CSS cho Footer - Mục cuối của trang web */
+footer {
+    background-color: #333; /* Màu nền của footer */
+    color: #fff; /* Màu chữ của footer */
+    padding: 20px 0; /* Thêm khoảng cách trong */
+    text-align: left;
 }
 
-    .best-seller h1 {
-        font-size: 2.5em; /* Kích thước chữ, điều chỉnh tùy ý */
-        font-weight: bold; /* Tạo độ đậm cho chữ */
-        color: #ff6600; /* Màu chữ */
+    .footer-content {
+        display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử */
+        justify-content: space-between; /* Căn giữa các phần tử trong footer */
+        align-items: center; /* Căn giữa các phần tử theo chiều dọc */
+        max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+        margin: 0 auto; /* Căn giữa toàn bộ footer */
+        padding: 0 20px; /* Padding vào các cạnh trái phải */
     }
 
+        .footer-content .contact-info {
+            width: 36%; /* Độ rộng của Địa Chỉ */
+        }
 
-/* Phần sản phẩm */
-.product-list {
-    display: grid; /* Dùng grid để hiển thị sản phẩm theo dạng lưới */
-    grid-template-columns: repeat(4, 1fr); /* Hiển thị 3 cột sản phẩm đều nhau */
-    gap: 50px; /* Khoảng cách giữa các sản phẩm */
-    padding: 200px; /* Padding cho phần sản phẩm */
+            .footer-content .contact-info h3 {
+                font-size: 20px; /* Kích thước font chữ của tiêu đề */
+                margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+            }
+
+            .footer-content .contact-info p {
+                font-size: 14px; /* Kích thước font chữ của thông tin liên lạc */
+                margin-bottom: 10px; /* Khoảng cách giữa các dòng */
+            }
+
+        .footer-content .social-media {
+            width: 45%; /* Chiếm 45% chiều rộng của footer */
+            text-align: right; /* Căn phải cho phần social media */
+        }
+
+            .footer-content .social-media h3 {
+                font-size: 20px; /* Kích thước font chữ của tiêu đề */
+                margin-bottom: 15px; /* Khoảng cách dưới tiêu đề */
+            }
+
+            .footer-content .social-media a {
+                display: block; /* Hiển thị các liên kết dưới dạng khối */
+                color: #fff; /* Màu chữ của các liên kết */
+                font-size: 16px; /* Kích thước font chữ của các liên kết */
+                margin-bottom: 10px; /* Khoảng cách giữa các liên kết */
+                text-decoration: none; /* Loại bỏ gạch dưới */
+                transition: color 0.3s ease; /* Hiệu ứng chuyển màu khi hover */
+            }
+
+                .footer-content .social-media a:hover {
+                    color: rgb(228, 97, 9); /* Đổi màu chữ khi hover */
+                }
+
+        .footer-bottom {
+            text-align: center; /* Căn giữa phần dưới footer */
+            padding: 10px 0; /* Padding cho phần dưới footer */
+            background-color: #222; /* Màu nền của phần dưới footer */
+        }
+
+            .footer-bottom p {
+                font-size: 14px; /* Kích thước font chữ */
+                margin: 0; /* Loại bỏ margin */
+            }
+
+
+
+/* CSS cho Trang Chủ và các mục bên trong */
+.index-page {
+    font-family: 'Times New Roman', sans-serif;
+    line-height: 1.6;
+    margin: 20px auto;
+    max-width: 1100px;
+    padding: 20px;
+    background-color: #FFF9F4; /* Màu nền cam cực kỳ nhạt */
 }
 
-    /* Thiết lập cho từng sản phẩm */
-    .product-item {
-        text-align: center; /* Căn giữa nội dung trong sản phẩm */
-        cursor: pointer; /* Con trỏ chuột sẽ thay đổi khi di chuột vào sản phẩm */
-        background-color: white; /* Màu nền trắng */
-        border: 2px solid #8B5E3C; /* Màu viền nâu đất */
-        border-radius: 10px; /* Bo tròn các góc */
-        overflow: hidden; /* Ẩn phần thừa của nội dung */
-        transition: transform 0.3s ease-in-out; /* Thêm hiệu ứng khi hover */
+    .index-page h1 {
+        font-size: 32px;
+        color: #FF5722; /* Màu cam cho tiêu đề */
+        text-align: center;
+        margin-bottom: 40px;
+        margin-top: 5px;
     }
 
-        .product-item:hover {
-            transform: scale(1.05); /* Phóng to sản phẩm khi hover */
+    .index-page h2 {
+        font-size: 32px;
+        color: #FF5722; /* Màu cam cho tiêu đề */
+        text-align: center;
+        margin-bottom: 40px;
+        margin-top: 80px;
+        border-top: 2px solid #FF5722; /* Đường viền cam cho các tiêu đề */
+        width: 50%; /* Đặt độ dài đường viền chỉ bằng 50% chiều rộng */
+        padding-top: 10px; /* Khoảng cách giữa tiêu đề và đường viền */
+        margin-left: auto; /* Căn giữa tiêu đề */
+        margin-right: auto; /* Căn giữa tiêu đề */
+    }
+
+    /* Phần sản phẩm */
+    .product-list {
+        display: grid; /* Dùng grid để hiển thị sản phẩm theo dạng lưới */
+        grid-template-columns: repeat(4, 1fr); /* Hiển thị 4 cột sản phẩm đều nhau */
+        gap: 50px; /* Khoảng cách giữa các sản phẩm */
+        padding: initial; /* Padding cho phần sản phẩm */
+    }
+
+        /* Thiết lập cho từng sản phẩm */
+        .product-item {
+            text-align: center; /* Căn giữa nội dung trong sản phẩm */
+            cursor: pointer; /* Con trỏ chuột sẽ thay đổi khi di chuột vào sản phẩm */
+            background-color: white; /* Màu nền trắng */
+            border: 2px solid #8B5E3C; /* Màu viền nâu đất */
+            border-radius: 10px; /* Bo tròn các góc */
+            overflow: hidden; /* Ẩn phần thừa của nội dung */
+            transition: transform 0.3s ease-in-out; /* Thêm hiệu ứng khi hover */
         }
 
-        .product-item img {
-            width: 100%; /* Ảnh chiếm toàn bộ chiều rộng của container */
-            height: 200px; /* Chiều cao cố định cho ảnh */
-            object-fit: cover; /* Đảm bảo ảnh không bị méo */
-        }
+            .product-item:hover {
+                transform: scale(1.05); /* Phóng to sản phẩm khi hover */
+            }
 
-        .product-item h3 {
-            margin-top: 10px; /* Khoảng cách trên tiêu đề của sản phẩm */
-            font-size: 18px; /* Kích thước chữ */
-            color: #333; /* Màu chữ */
-        }
+            .product-item img {
+                width: 100%; /* Ảnh chiếm toàn bộ chiều rộng của container */
+                height: 200px; /* Chiều cao cố định cho ảnh */
+                object-fit: cover; /* Đảm bảo ảnh không bị méo */
+            }
 
-        .product-item p {
-            font-size: 14px; /* Kích thước chữ mô tả */
-            color: #777; /* Màu chữ nhạt */
-            margin: 5px 0; /* Khoảng cách giữa các đoạn văn */
-        }
+            .product-item h3 {
+                margin-top: 10px; /* Khoảng cách trên tiêu đề của sản phẩm */
+                font-size: 18px; /* Kích thước chữ */
+                color: #333; /* Màu chữ */
+            }
 
-        .product-item .price {
-            font-size: 16px; /* Kích thước chữ giá */
-            font-weight: bold; /* Làm đậm giá */
-            color: #8B5E3C; /* Màu nâu đất cho giá */
-        }
+            .product-item p {
+                font-size: 14px; /* Kích thước chữ mô tả */
+                color: #777; /* Màu chữ nhạt */
+                margin: 5px 0; /* Khoảng cách giữa các đoạn văn */
+            }
+
+            .product-item .price {
+                font-size: 16px; /* Kích thước chữ giá */
+                font-weight: bold; /* Làm đậm giá */
+                color: #8B5E3C; /* Màu nâu đất cho giá */
+            }
 
 
 
-/* Design Đăng Nhập */
-/* Nền của trang đăng nhập */
+/* Ảnh nền của trang Đăng Nhập */
 .background {
     position: relative;
     width: 100%;
@@ -561,7 +705,7 @@ body, html {
 
 
 
-/* Phong cách tổng thể cho form Đăng Nhập */
+/* CSS cho form Đăng Nhập */
 .login-form {
     width: 30%; /* Đặt độ rộng của form */
     padding: 20px;
@@ -603,6 +747,13 @@ body, html {
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
         }
 
+    .login-form .error-message {
+        margin-top: 12px;
+        font-size: 14px;
+        font-weight: bold;
+        font-family: 'Times New Roman';
+    }
+
     /* Nút Đăng Nhập */
     .login-form button {
         width: 100%;
@@ -643,7 +794,7 @@ body, html {
 
 
 
-/* Phong cách tổng thể cho form Đăng Ký */
+/* CSS cho form Đăng Ký */
 .register-form {
     width: 30%; /* Đặt độ rộng của form */
     padding: 20px;
@@ -787,4 +938,514 @@ body, html {
 
     .btn-continue:hover {
         background-color: #0056b3;
+    }
+
+
+
+
+
+
+/* CSS cho phần Giới thiệu và các mục bên trong */
+.about {
+    font-family: 'Times New Roman', sans-serif;
+    line-height: 1.6;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #FFF9F4; /* Màu nền cam cực kỳ nhạt */
+}
+
+    .about h1 {
+        font-size: 32px;
+        color: #FF5722; /* Màu cam cho tiêu đề */
+        text-align: center;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #FF5722; /* Đường viền cam cho các tiêu đề */
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        margin-top: 8px;
+    }
+
+    .about p {
+        font-size: 18px;
+        color: #333; /* Màu chữ xám đậm cho đoạn văn */
+        margin-bottom: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .about strong {
+        font-weight: bold;
+        color: #FF5722; /* Màu cam cho chữ in đậm */
+    }
+
+    .about h2, .about h3 {
+        font-size: 24px;
+        color: #333; /* Màu xám đậm cho các tiêu đề nhỏ */
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #FF5722; /* Đường viền cam cho các tiêu đề */
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+    }
+
+        .about h2 {
+            padding-top: 30px;
+        }
+
+    .about ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+        .about ul li {
+            font-size: 18px;
+            color: #555; /* Màu xám vừa phải cho các mục trong danh sách */
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+            .about ul li::before {
+                content: "✔️";
+                color: #FF5722; /* Màu cam cho biểu tượng kiểm tra */
+                margin-right: 10px;
+            }
+
+
+
+/* CSS cho phần Hướng Dẫn Đặt - Mua Hàng và các mục bên trong */
+.order-instructions {
+    font-family: 'Times New Roman', sans-serif;
+    line-height: 1.6;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #FFF9F4; /* Màu nền cam cực kỳ nhạt */
+}
+
+    /* Tiêu đề chính Oder-instructions */
+    .order-instructions h1 {
+        font-size: 32px;
+        color: #FF5722; /* Màu cam cho tiêu đề */
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 8px;
+    }
+
+    /* Tiêu đề phụ Oder-instructions */
+    .order-instructions h2 {
+        font-size: 24px;
+        color: #333; /* Màu xám đậm cho các tiêu đề nhỏ */
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #FF5722; /* Đường viền cam cho các tiêu đề */
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        padding-top: 10px;
+    }
+
+    /* Đoạn văn Oder-instructions */
+    .order-instructions p {
+        font-size: 18px;
+        color: #333; /* Màu chữ xám đậm cho đoạn văn */
+        margin-bottom: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .order-instructions strong {
+        font-weight: bold;
+        color: #FF5722; /* Màu cam cho chữ in đậm */
+    }
+
+    .order-instructions ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+        .order-instructions ul li {
+            font-size: 18px;
+            color: #555; /* Màu xám vừa phải cho các mục trong danh sách */
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+            .order-instructions ul li::before {
+                content: "✔️";
+                color: #FF5722; /* Màu cam cho biểu tượng kiểm tra */
+                margin-right: 10px;
+            }
+
+
+
+/* CSS cho phần Hướng Dẫn Đặt Hàng và các mục bên trong */
+.payment-instructions {
+    font-family: 'Times New Roman', sans-serif;
+    line-height: 1.6;
+    margin: 20px auto;
+    max-width: 1200px;
+    padding: 20px;
+    background-color: #FFF9F4; /* Màu nền cam cực kỳ nhạt */
+}
+
+    /* Tiêu đề chính Instruct-pay */
+    .payment-instructions h1 {
+        font-size: 32px;
+        color: #FF5722; /* Màu cam cho tiêu đề */
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 8px;
+    }
+
+    /* Tiêu đề phụ Instruct-pay */
+    .payment-instructions h2 {
+        font-size: 24px;
+        color: #333; /* Màu xám đậm cho các tiêu đề nhỏ */
+        margin-top: 20px;
+        margin-bottom: 10px;
+        border-bottom: 2px solid #FF5722; /* Đường viền cam cho các tiêu đề */
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+        padding-top: 10px;
+    }
+
+    /* Đoạn văn Instruct-pay */
+    .payment-instructions p {
+        font-size: 18px;
+        color: #333; /* Màu chữ xám đậm cho đoạn văn */
+        margin-bottom: 20px;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+    .payment-instructions strong {
+        font-weight: bold;
+        color: #FF5722; /* Màu cam cho chữ in đậm */
+    }
+
+    .payment-instructions ul {
+        list-style-type: none;
+        padding-left: 0;
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+
+        .payment-instructions ul li {
+            font-size: 18px;
+            color: #555; /* Màu xám vừa phải cho các mục trong danh sách */
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
+
+            .payment-instructions ul li::before {
+                content: "✔️";
+                color: #FF5722; /* Màu cam cho biểu tượng kiểm tra */
+                margin-right: 10px;
+            }
+
+    .final-message {
+        font-size: 20px;
+        color: #FF4500; /* Màu sắc nổi bật */
+        font-weight: bold; /* Tạo điểm nhấn */
+        text-align: center; /* Căn giữa nội dung */
+        margin-top: 45px; /* Khoảng cách phía trên */
+    }
+
+
+
+/* CSS cho phần Liên Hệ và các mục bên trong */
+.contact-page {
+    font-family: 'Times New Roman', sans-serif;
+    line-height: 1.6;
+    margin: 20px auto;
+    max-width: 1200px;
+    min-height: 650px;
+    padding: 20px;
+    background-color: #FFF9F4; /* Màu nền cam cực kỳ nhạt */
+}
+
+    .contact-page h1 {
+        font-size: 32px;
+        color: #FF5722; /* Màu cam cho tiêu đề */
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 8px;
+    }
+
+    /* Thông tin liên hệ */
+    .contact-details p {
+        font-size: 18px;
+        color: #333; /* Màu chữ xám đậm cho đoạn văn */
+        text-align: center;
+    }
+
+        .contact-details strong {
+            font-weight: bold;
+            color: #FF5722; /* Màu cam cho chữ in đậm */
+        }
+
+    /* Bố cục chính */
+    .contact-main {
+        font-family: 'Times New Roman', sans-serif;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 78px; /*Khoảng cách ở giữa của form liên hệ với map */
+        margin-top: 60px;
+    }
+
+        /* Form Liên Hệ */
+        .contact-form {
+            flex: 1 1 30%; /* Chiếm 30% chiều ngang */
+            max-width: 35%;
+        }
+
+            .contact-form h2 {
+                font-size: 20px;
+                font-weight: bold;
+                margin-bottom: auto; /* Khoảng cách trên dưới của tiêu đề và form */
+                margin-top: -9px; /* Canh ngang hàng với chiều cao của map */
+            }
+
+            .contact-form form {
+                display: flex;
+                flex-direction: column;
+                gap: 11px; /*Khoảng cách trên dưới của form thông tin với button */
+            }
+
+            .contact-form input,
+            .contact-form textarea {
+                font-family: 'Times New Roman', sans-serif;
+                width: 92%;
+                padding: 15px;
+                margin-top: 20px;
+                border: 1px solid #ccc;
+                border-radius: 8px;
+                font-size: 14px;
+            }
+
+            .contact-form button {
+                padding: 13px;
+                background-color: #007BFF;
+                color: white;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 15px;
+                width: 100%;
+            }
+
+                .contact-form button:hover {
+                    background-color: #0056b3;
+                }
+
+        /* Google Map */
+        .contact-map {
+            flex: 1 1 53%; /* Chiếm 53% chiều ngang */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+
+
+/* CSS cho trang Thực Đơn và các mục bên trong */
+.menu-container {
+    font-family: 'Times New Roman', sans-serif;
+    margin: 20px auto;
+    max-width: 1100px;
+    padding: 20px;
+    background-color: #FFF9F4;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+    .menu-container h1 {
+        font-size: 32px;
+        color: #FF5722; /* Màu cam cho tiêu đề */
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 8px;
+    }
+
+/* Thanh danh mục */
+.horizontal-menu {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around; /* Cân đều các mục */
+    background: linear-gradient(to right, #F8E8D3, #F4CBA8); /* Màu trung tính */
+    border-top: 2px solid #D9B08C;
+    border-bottom: 2px solid #D9B08C;
+    border-radius: 10px; /* Bo góc nhẹ */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+    .horizontal-menu li {
+        font-family: 'Times New Roman', sans-serif;
+        font-weight: bolder;
+        padding: 10px;
+        margin: 5px; /* Tạo khoảng cách giữa các mục */
+        cursor: pointer;
+        font-size: 18px;
+        color: #5A3E2B; /* Màu chữ đậm nhưng không quá tối */
+        border-radius: 8px; /* Bo góc cho từng mục */
+        transition: transform 0.3s, background-color 0.3s, color 0.3s;
+        text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6); /* Tạo hiệu ứng sáng chữ */
+    }
+
+        .horizontal-menu li.active {
+            background-color: #FF5722;
+            color: #FFF8E1; /* Màu chữ sáng hơn khi được chọn */
+            font-weight: bold;
+            transform: scale(1.1); /* Phóng to nhẹ khi active */
+        }
+
+        .horizontal-menu li:hover {
+            background-color: #E64A19; /* Màu đậm hơn khi hover */
+            color: #FFF8E1;
+            transform: scale(1.05); /* Hiệu ứng phóng to khi hover */
+        }
+
+/* Khoảng cách giữa danh mục và các món ăn */
+.menu-sections {
+    margin-top: 20px;
+}
+
+
+/* Phần các món ăn */
+.food-items {
+    display: grid; /* Dùng grid để hiển thị sản phẩm theo dạng lưới */
+    grid-template-columns: repeat(4, 1fr); /* Hiển thị 3 cột sản phẩm đều nhau */
+    gap: 50px; /* Khoảng cách giữa các sản phẩm */
+    padding: initial; /* Padding cho phần sản phẩm */
+}
+
+/* Thiết lập cho từng món ăn */
+.food-item {
+    text-align: center; /* Căn giữa nội dung trong sản phẩm */
+    cursor: pointer; /* Con trỏ chuột sẽ thay đổi khi di chuột vào sản phẩm */
+    background-color: white; /* Màu nền trắng */
+    border: 2px solid #8B5E3C; /* Màu viền nâu đất */
+    border-radius: 10px; /* Bo tròn các góc */
+    overflow: hidden; /* Ẩn phần thừa của nội dung */
+    transition: transform 0.3s ease-in-out; /* Thêm hiệu ứng khi hover */
+}
+
+    /* Hiệu ứng hover */
+    .food-item:hover {
+        transform: scale(1.05); /* Phóng to sản phẩm khi hover */
+    }
+
+    .food-item img {
+        width: 100%; /* Ảnh chiếm toàn bộ chiều rộng của container */
+        height: 200px; /* Chiều cao cố định cho ảnh */
+        object-fit: cover; /* Đảm bảo ảnh không bị méo */
+    }
+
+    .food-item h3 {
+        margin-top: 10px; /* Khoảng cách trên tiêu đề của sản phẩm */
+        font-size: 18px; /* Kích thước chữ */
+        color: #333; /* Màu chữ */
+    }
+
+    .food-item p {
+        font-size: 14px; /* Kích thước chữ mô tả */
+        font-weight: bold;
+        color: #8B5E3C; /* Màu nâu đất */
+        margin: 5px 0; /* Khoảng cách giữa các đoạn văn */
+    }
+
+    .food-item .price {
+        font-size: 16px; /* Kích thước chữ giá */
+        font-weight: bold; /* Làm đậm giá */
+        color: #8B5E3C; /* Màu nâu đất cho giá */
+    }
+
+
+
+/* CSS cho trang Thông Tin và các nội dung bên trong */
+.account-page {
+    font-family: 'Times New Roman', sans-serif;
+    line-height: 1.6;
+    margin: 20px auto;
+    max-width: 900px;
+    padding: 20px;
+    background-color: #FFF9F4; /* Màu nền cam cực kỳ nhạt */
+}
+
+    .account-page h1 {
+        font-size: 32px;
+        color: #FF5722; /* Màu cam cho tiêu đề */
+        text-align: center;
+        margin-bottom: 40px;
+        margin-top: 5px;
+    }
+
+.control-form-myaccount label {
+    font-size: 17px; /*tạo kích thước cho các thuộc tính như User Name, Full Name, Email, Phone Number trong My Account*/
+    display: inline-block;
+    margin: 5px;
+    width: 12%;
+    text-align: right;
+    padding-right: 10px;
+}
+
+.control-form-myaccount input {
+    display: inline-block;
+    margin: 20px;
+    width: 78%;
+    padding: 8px;
+    margin-bottom: 25px;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    color: black;
+}
+
+input[readonly] {
+    background-color: white; /* Màu nền cho trường readonly */
+    color: black; /* Màu chữ */
+    border: none; /* Viền */
+}
+
+.gender-selection label {
+    font-size: 17px; /*tạo kích thước cho thuộc tính Sex trong My Account*/
+}
+
+.gender-option-edit {
+    display: flex;
+    align-items: center;
+    width: 32%;
+}
+
+    .gender-option-edit label {
+        font-size: 17px; /*tạo kích thước cho thuộc tính Male & Female trong My Account*/
+    }
+
+.update-notification {
+    color: red;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 30px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+.savechanges-button {
+    display: block;
+    width: 15%;
+    padding: 12px;
+    margin: 0 auto;
+    margin-bottom: 25px;
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    .savechanges-button:hover {
+        background-color: #ff6347;
     }

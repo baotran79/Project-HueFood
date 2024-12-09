@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ẩm Thực Huế - HueHouse</title>
     <link rel="stylesheet" href="~/Content/main.css">
+    <script src="~/Scripts/main.js" defer></script>
 </head>
 <body>
     <div class="container">
@@ -19,16 +20,46 @@
                 <div class="menu-right">
                     <ul>
                         <li class="search-container">
-                            <input type="text" placeholder="Tìm kiếm..." class="search-box">
-                        </li>
-                        <li class="menu-item">
-                            <span class="menu-link">Tài Khoản</span>
-                            <div class="dropdown-account">
-                                <a href="@Url.Action("Login", "Home")">Đăng Nhập</a>
-                                <a href="@Url.Action("Register", "Home")">Đăng Ký</a>
+                            <form id="searchForm" action="javascript:void(0);" method="get">
+                                <input type="text" name="query" id="searchQuery" placeholder="Tìm kiếm..." class="search-box" autocomplete="off">
+                            </form>
+                            <div id="searchResults" class="search-results-dropdown" style="display: none;">
+                                <div class="search-item">
+                                    <img src="example.jpg" alt="Example Image" class="search-item-image">
+                                    <div class="search-item-text">Tên sản phẩm hoặc mô tả</div>
+                                </div>
+                                <!-- Thêm nhiều kết quả khác ở đây -->
                             </div>
                         </li>
-                        <li><a href="@Url.Action("ShoppingCart", "Home")">Giỏ Hàng</a></li>
+                        @if (Session["Username"] != null)
+                        {
+                            <!-- Hiển thị giao diện khi người dùng đã đăng nhập -->
+                            <li class="menu-item">
+                                <span class="menu-link">👤 @Session["Username"]</span>
+                                <div class="dropdown-username">
+                                    <a href="@Url.Action("My_Account", "Home")">Thông Tin Cá Nhân</a>
+                                    <a href="@Url.Action("Logout", "Home")">Đăng Xuất</a>
+                                </div>
+                            </li>
+                            <li><a href="@Url.Action("ShoppingCart", "Home")">Giỏ Hàng</a></li>
+                        }
+                        else
+                        {
+                            <!-- Hiển thị giao diện khi người dùng chưa đăng nhập -->
+                            <li class="menu-item">
+                                <span class="menu-link">Tài Khoản</span>
+                                <div class="dropdown-account">
+                                    <!-- Khi bấm vào Đăng Nhập, luôn chuyển hướng đến Login và sau khi đăng nhập thành công chuyển về Trang Chủ -->
+                                    <a href="@Url.Action("Login", "Home")">Đăng Nhập</a>
+                                    <!-- Link Đăng Ký không thay đổi -->
+                                    <a href="@Url.Action("Register", "Home")">Đăng Ký</a>
+                                </div>
+                            </li>
+                            <li>
+                                <!-- Khi bấm vào Giỏ Hàng, chuyển hướng đến Login và sau khi đăng nhập thành công quay lại ShoppingCart -->
+                                <a href="@{ Session["RedirectUrl"] = Url.Action("ShoppingCart", "Home"); }@Url.Action("Login", "Home")">Giỏ Hàng</a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -44,12 +75,12 @@
                     <li class="menu-item">
                         <span class="menu-link">Hướng Dẫn</span>
                         <div class="dropdown-instruction">
-                            <a href="@Url.Action("Order_Instructions", "Home")">Hướng Dẫn Đặt Hàng</a>
+                            <a href="@Url.Action("Order_Instructions", "Home")">Hướng Dẫn Đặt - Mua Hàng</a>
                             <a href="@Url.Action("Payment_Instructions", "Home")">Hướng Dẫn Thanh Toán</a>
                         </div>
                     </li>
                     <li><a href="@Url.Action("About", "Home")">Giới Thiệu</a></li>
-                    <li><a href="@Url.Action("Contact", "Home")">Liên Hệ</a></li>
+                    <li><a href="@Url.Action("Contact", "Home")">Liên Hệ & Góp Ý</a></li>
                 </ul>
             </nav>
         </header>
@@ -65,9 +96,9 @@
             <div class="footer-content">
                 <div class="contact-info">
                     <h3>Liên Hệ</h3>
-                    <p><strong>Địa chỉ:</strong> 5/11c Lê Quý Đôn, Phường 11, Quận Phú Nhuận - Tp.Hồ Chí Minh</p>
-                    <p><strong>Điện thoại:</strong> (+84) - 987 - 910 - 320</p>
-                    <p><strong>Email:</strong> HueHouse511@gmail.com</p>
+                    <p><strong>Địa chỉ:</strong> 5/11c Lê Quý Đôn, Phường 14, Quận Phú Nhuận - Tp.Hồ Chí Minh</p>
+                    <p><strong>Điện thoại:</strong> 0973283431 | 0905207922</p>
+                    <p><strong>Email:</strong> huehouse511@gmail.com</p>
                 </div>
                 <div class="social-media">
                     <h3>Theo Dõi Chúng Tôi</h3>

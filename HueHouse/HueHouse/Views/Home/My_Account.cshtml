@@ -1,0 +1,47 @@
+﻿@{
+    ViewBag.Title = "Thông Tin Cá Nhân";
+}
+
+<div class="main">
+    <div class="account-page">
+        <h1>Thông Tin Cá Nhân</h1>
+        <div class="control-form-myaccount">
+            <form action="@Url.Action("My_Account", "Home")" method="post">
+                @Html.AntiForgeryToken()
+
+                <label for="fullname">Full Name:</label>
+                <input type="text" id="fullname" value="@Session["FullName"]" readonly>
+
+                <label for="username">Username:</label>
+                <input type="text" id="username" value="@Session["Username"]" readonly>
+
+                <div class="gender-selection">
+                    <label for="sex">Sex:</label>
+                    <div>
+                        <input type="radio" id="male" name="Sex" value="Nam" @(Model?.Sex == "Nam" ? "checked" : "")>
+                        <label for="male">Male</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="female" name="Sex" value="Nữ" @(Model?.Sex == "Nữ" ? "checked" : "")>
+                        <label for="female">Female</label>
+                    </div>
+                </div>
+
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="Phone" value="@Model?.Phone">
+
+                <label for="address">Địa Chỉ:</label>
+                <input type="text" id="address" name="Address" value="@Model?.Address">
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="Email" value="@Model?.Email">
+
+                <div class="update-notification">
+                    @ViewBag.Message
+                </div>
+
+                <button type="submit" class="savechanges-button">Save Changes</button>
+            </form>
+        </div>
+    </div>
+</div>
