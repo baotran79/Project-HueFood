@@ -230,3 +230,7 @@ D:\project web\Project-HueFood-Test Code\HueHouse\HueHouse\bin\EntityFramework.d
 D:\project web\Project-HueFood-Test Code\HueHouse\HueHouse\bin\EntityFramework.SqlServer.dll
 D:\project web\Project-HueFood-Test Code\HueHouse\HueHouse\bin\EntityFramework.xml
 D:\project web\Project-HueFood-Test Code\HueHouse\HueHouse\bin\EntityFramework.SqlServer.xml
+D:\project web\Project-HueFood\HueHouse\HueHouse\bin\EntityFramework.dll
+D:\project web\Project-HueFood\HueHouse\HueHouse\bin\EntityFramework.SqlServer.dll
+D:\project web\Project-HueFood\HueHouse\HueHouse\bin\EntityFramework.xml
+D:\project web\Project-HueFood\HueHouse\HueHouse\bin\EntityFramework.SqlServer.xml
