@@ -1,0 +1,51 @@
+﻿@model HueHouse.Models.OrderViewModel
+
+@{
+    ViewBag.Title = "Thông Tin Đơn Hàng";
+}
+
+<div class="container">
+    <h1>Thông Tin Đơn Hàng</h1>
+
+    <div class="order-info">
+        <h2>Thông Tin Đơn Hàng</h2>
+        <p><strong>Mã Đơn Hàng:</strong> @Model.Orders.OrderID</p>
+        <p><strong>Ngày Đặt:</strong> @(Model.Orders.OrderDate.HasValue ? Model.Orders.OrderDate.Value.ToString("dd/MM/yyyy") : "Không có ngày đặt")</p>
+        <p><strong>Tổng Tiền:</strong> @(string.Format("{0:#,##0} VNĐ", Model.Orders.TotalAmount))</p>
+        <p><strong>Trạng Thái:</strong> @Model.Orders.Status</p>
+    </div>
+
+    <h3>Chi Tiết Đơn Hàng</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Tên Sản Phẩm</th>
+                <th>Số Lượng</th>
+                <th>Đơn Giá</th>
+                <th>Tổng Tiền</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var detail in Model.OrderDetails)
+            {
+                <tr>
+                    <td>@detail.Products.ProductName</td>
+                    <td>@detail.Quantity</td>
+                    <td>@(string.Format("{0:#,##0} VNĐ", detail.Price))</td>
+                    <td>@(string.Format("{0:#,##0} VNĐ", detail.TotalAmount))</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="order-summary">
+        <h3>Thông Tin Khách Hàng</h3>
+        <p><strong>Tên Khách Hàng:</strong> @Model.Orders.Users.FullName</p>
+        <p><strong>Địa Chỉ:</strong> @Model.Orders.Users.Address</p>
+        <p><strong>Số Điện Thoại:</strong> @Model.Orders.Users.Phone</p>
+    </div>
+
+    <div class="order-actions">
+        <a href="@Url.Action("Payment", "Home", new { orderId = Model.Orders.OrderID })" class="btn btn-primary">Thanh Toán</a>
+    </div>
+</div>

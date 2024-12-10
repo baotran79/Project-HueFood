@@ -1,0 +1,47 @@
+﻿@model HueHouse.Models.ProductDetailsViewModel
+@{
+    ViewBag.Title = Model.Products.ProductName;
+}
+
+<div class="main">
+    <div class="product-details">
+        <div class="product-image">
+            <img src="/@Model.Products.ProductImage" alt="@Model.Products.ProductName" />
+        </div>
+        <div class="product-info">
+            <div class="commitment-box">
+                <h2>Cam Kết</h2>
+                <ul>
+                    <li>Nguồn gốc rõ ràng</li>
+                    <li>Chất lượng đảm bảo</li>
+                    <li>Giá cả cạnh tranh</li>
+                    <li>Tốt cho sức khoẻ</li>
+                </ul>
+            </div>
+
+            <h1>@Model.Products.ProductName</h1>
+            <p>Giá: <strong>@(string.Format("{0:#,##0} VNĐ", Model.Products.Price))</strong></p>
+            <p>Số lượng: @Model.ProductDetails.Quantity</p>
+            <p>Tình trạng: @Model.ProductDetails.Status</p>
+            <p>Mô tả: @Model.ProductDetails.Description</p>
+
+
+            @if (Session["UserID"] == null)
+            {
+                <a href="@Url.Action("Login", "Home", new { returnUrl = Request.Url.AbsoluteUri })">
+                    <button class="btn btn-primary">Hãy Đăng Nhập</button>
+                </a>
+            }
+            else
+            {
+                <form action="@Url.Action("AddToCart", "Home")" method="post">
+                    <input type="hidden" name="productId" value="@Model.Products.ProductID" />
+                    <input type="number" name="quantity" value="1" min="1" class="form-control" />
+                    <button class="btn btn-primary" type="submit">Thêm vào giỏ</button>
+                </form>
+            }
+
+        </div>
+
+    </div>
+</div>

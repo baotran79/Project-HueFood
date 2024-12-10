@@ -899,6 +899,15 @@ footer {
 
 /* Giỏ Hàng */
 /* Phong cách cho giỏ hàng trống */
+.Shopping-page {
+    font-family: 'Times New Roman', sans-serif;
+    line-height: 1.6;
+    margin: 20px auto;
+    max-width: 1100px;
+    padding: 20px;
+    background-color: #FFF9F4;
+}
+
 .shopping-empty {
     text-align: center;
     max-width: 800px; /* Đặt chiều rộng tối đa */
@@ -1396,13 +1405,28 @@ footer {
 .control-form-myaccount input {
     display: inline-block;
     margin: 20px;
-    width: 78%;
+    width: 50%;
     padding: 8px;
     margin-bottom: 25px;
     border: 1px solid #ccc;
     font-size: 13px;
     color: black;
 }
+
+.control-form-myaccount {
+    width: 100%;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+    .control-form-myaccount .gender-selection {
+        display: flex;
+        margin-left: 150px;
+        width: 50%;
+        padding: 8px;
+        margin-bottom: 25px;
+    }
 
 input[readonly] {
     background-color: white; /* Màu nền cho trường readonly */
@@ -1449,3 +1473,227 @@ input[readonly] {
     .savechanges-button:hover {
         background-color: #ff6347;
     }
+
+
+/*Trang Details*/
+/* Khung chứa chi tiết sản phẩm */
+.product-details {
+    display: flex; /* Sử dụng Flexbox để sắp xếp các phần tử con theo chiều ngang */
+    justify-content: space-between; /* Căn chỉnh các phần tử con sao cho có khoảng cách đều nhau giữa chúng */
+    padding: 30px; /* Thêm khoảng cách bên trong (padding) cho container, giúp nội dung không dính sát viền */
+    background-color: #f9f9f9; /* Đặt màu nền nhẹ cho toàn bộ vùng chi tiết sản phẩm */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng mờ nhẹ xung quanh phần tử để tạo chiều sâu */
+    border-radius: 10px; /* Bo góc của container để làm mềm mại các cạnh */
+    margin: 20px auto; /* Căn giữa container với lề tự động (auto) và tạo khoảng cách ngoài container */
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa của container để không bị quá rộng trên màn hình lớn */
+}
+
+/* Phần hình ảnh sản phẩm */
+.product-image {
+    flex: 0 0 350px; /* Dùng Flexbox để xác định chiều rộng cố định cho phần hình ảnh (350px) */
+    margin-right: 30px; /* Thêm khoảng cách bên phải của hình ảnh để tách biệt với thông tin sản phẩm */
+    border-radius: 10px; /* Bo góc của hình ảnh để tạo sự mềm mại */
+    overflow: hidden; /* Đảm bảo rằng hình ảnh không bị tràn ra ngoài vùng chứa nếu kích thước không khớp */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Thêm bóng mờ xung quanh hình ảnh để tạo chiều sâu */
+}
+
+    .product-image img {
+        width: 100%; /* Đảm bảo hình ảnh sẽ chiếm 100% chiều rộng của container, giúp phù hợp với kích thước của nó */
+        height: 100%; /* Giữ tỉ lệ của hình ảnh, giúp tránh bị méo khi thay đổi kích thước */
+        object-fit: cover;
+        border-radius: 10px;
+    }
+
+/* Phần thông tin sản phẩm */
+.product-info {
+    flex: 1; /* Phần thông tin sản phẩm chiếm không gian còn lại của container */
+    display: flex;
+    flex-direction: column; /* Sắp xếp các phần tử bên trong theo chiều dọc */
+    justify-content: space-between; /* Căn chỉnh các phần tử con với khoảng cách đều nhau */
+}
+
+    .product-info h1 {
+        font-size: 32px; /* Cỡ chữ của tên sản phẩm */
+        font-weight: bold; /* Đặt chữ đậm cho tên sản phẩm */
+        margin: 0; /* Loại bỏ khoảng cách mặc định của thẻ h1 */
+        color: #333;
+    }
+
+    .product-info p {
+        font-size: 18px; /* Đặt kích thước chữ cho các thông tin sản phẩm (giá, số lượng, tình trạng, mô tả) */
+        margin: 10px 0; /* Thêm khoảng cách giữa các đoạn văn để không bị sát nhau */
+        color: #555; /* Đặt màu chữ nhẹ để dễ đọc */`
+        margin-bottom: 10px;
+    }
+
+    .product-info .price {
+        font-size: 1.6em;
+        font-weight: bold;
+        color: #e74c3c;
+        margin-bottom: 20px;
+    }
+
+    .product-info .btn {
+        padding: 10px 20px; /* Thêm khoảng cách bên trong các nút để chúng có đủ không gian và dễ nhấn */
+        font-size: 18px;
+        border-radius: 5px; /* Bo góc của nút để tạo sự mềm mại */
+        cursor: pointer; /* Hiển thị con trỏ dạng tay khi di chuột qua nút */
+        text-align: center;
+        border: none;
+        display: inline-block;
+        margin: 10px 5px;
+        inline-size: max-content
+    }
+    .product-info .commitment-box {
+            margin-inline-start: auto;
+            border: 2px solid #ff6600;
+            padding-left: 10px;
+            padding-right: 30px;
+    }
+        .product-info .commitment-box h2 {
+            border-bottom: 3px solid #FF5722;
+            color: #FF5722;
+        }
+
+        .product-info .commitment-box li {
+            font-size: 20px;
+            padding-right: 30px;
+        }
+
+        .btn-primary {
+            background-color: #ff6600; /* Màu nền của nút "Thêm vào giỏ" là màu xanh dương */
+            color: white; /* Chữ màu trắng */
+        }
+
+        .btn-primary:hover {
+            background-color: #c3601e; /* Màu nền của nút "Mua ngay" là màu xanh lá cây */
+            color: white; /* Chữ màu trắng */
+        }
+
+
+/* Trang Giỏ Hàng */
+/* Định dạng khi giỏ hàng trống */
+.shopping-empty {
+    text-align: center; /* Canh giữa nội dung văn bản */
+    padding: 50px 0; /* Thêm khoảng trống 50px trên và dưới */
+}
+
+.empty-cart-img {
+    max-width: 350px; /* Giới hạn chiều rộng tối đa của hình ảnh là 350px */
+    margin-bottom: 20px; /* Thêm khoảng trống 20px phía dưới hình ảnh */
+}
+
+.empty-cart-text {
+    font-size: 18px;
+    color: #6c757d;
+}
+
+.btn-continue {
+    display: inline-block; /* Hiển thị nút như một khối nội tuyến */
+    padding: 10px 20px; /* Thêm khoảng trống 10px trên dưới và 20px trái phải */
+    margin-top: 20px; /* Thêm khoảng trống 20px phía trên nút */
+    font-size: 16px; /* Đặt kích thước chữ là 16px */
+    color: #fff; /* Đặt màu chữ là trắng */
+    background-color: #007bff; /* Đặt màu nền là xanh lam */
+    border: none; /* Loại bỏ viền mặc định */
+    border-radius: 4px; /* Bo tròn các góc của nút */
+    text-decoration: none; /* Loại bỏ gạch chân của liên kết */
+    transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu mượt mà khi hover */
+}
+
+    .btn-continue:hover {
+        background-color: #0056b3; /* Đổi màu nền sang màu xanh đậm khi hover */
+    }
+
+/* Định dạng bảng giỏ hàng */
+.shopping-cart h1 {
+    margin-bottom: 20px; /* Thêm khoảng trống 20px phía dưới tiêu đề */
+    font-size: 30px; /* Đặt kích thước chữ là 26px */
+    color: #ff6600; /* Đặt màu chữ là xám đậm */
+}
+
+.table {
+    width: 100%; /* Đặt chiều rộng bảng là 100% */
+    border-collapse: collapse; /* Gộp các đường viền bảng lại với nhau */
+    margin-bottom: 20px; /* Thêm khoảng trống 20px phía dưới bảng */
+}
+
+    .table th, .table td {
+        padding: 12px 15px; /* Thêm khoảng trống 12px trên dưới và 15px trái phải cho ô */
+        text-align: left; /* Canh trái nội dung bên trong ô */
+        border-bottom: 3px solid #dee2e6; /* Thêm đường viền dưới cho ô */
+    }
+
+    .table th {
+        background-color: #f1f1f1; /* Đặt màu nền cho ô tiêu đề là xám nhạt */
+        font-weight: bold; /* Đặt chữ in đậm cho tiêu đề */
+        color: #343a40; /* Đặt màu chữ là xám đậm */
+    }
+
+.product-img {
+    max-width: 200px; /* Giới hạn chiều rộng tối đa của hình ảnh sản phẩm là 100px */
+    border-radius: 8px; /* Bo tròn các góc của hình ảnh */
+
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Đặt màu nền nút là đỏ */
+    color: #fff; /* Đặt màu chữ là trắng */
+    border: none; /* Loại bỏ viền mặc định */
+    padding: 6px 12px; /* Thêm khoảng trống 6px trên dưới và 12px trái phải */
+    border-radius: 4px; /* Bo tròn các góc của nút */
+    cursor: pointer; /* Thay đổi con trỏ thành hình bàn tay khi hover */
+    transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu mượt mà khi hover */
+}
+
+    .btn-danger:hover {
+        background-color: #c82333; /* Đổi màu nền sang màu đỏ đậm khi hover */
+    }
+
+/* Định dạng tổng tiền và thanh toán */
+.cart-summary {
+    text-align: right; /* Canh phải nội dung bên trong phần tóm tắt giỏ hàng */
+    padding-right: 50px;
+}
+
+    .cart-summary h2 {
+        font-size: 24px; /* Đặt kích thước chữ là 24px */
+        color: #343a40; /* Đặt màu chữ là xám đậm */
+        margin-bottom: 20px; /* Thêm khoảng trống 20px phía dưới tiêu đề */
+    }
+
+.btn-success {
+    display: inline-block; /* Hiển thị nút như một khối nội tuyến */
+    padding: 10px 20px; /* Thêm khoảng trống 10px trên dưới và 20px trái phải */
+    font-size: 16px; /* Đặt kích thước chữ là 16px */
+    color: #fff; /* Đặt màu chữ là trắng */
+    background-color: #28a745; /* Đặt màu nền nút là xanh lá */
+    border: none; /* Loại bỏ viền mặc định */
+    border-radius: 4px; /* Bo tròn các góc của nút */
+    text-decoration: none; /* Loại bỏ gạch chân của liên kết */
+    transition: background-color 0.3s ease; /* Thêm hiệu ứng chuyển màu mượt mà khi hover */
+}
+
+    .btn-success:hover {
+        background-color: #218838; /* Đổi màu nền sang màu xanh lá đậm khi hover */
+    }
+
+.btn-quantity {
+    background-color: #007bff; /* Màu nền xanh lam */
+    color: #fff; /* Màu chữ trắng */
+    border: none; /* Loại bỏ viền mặc định */
+    padding: 5px 10px; /* Thêm khoảng trống bên trong nút */
+    margin: 0 5px; /* Khoảng cách giữa các nút và văn bản */
+    border-radius: 4px; /* Bo tròn góc nút */
+    cursor: pointer; /* Con trỏ hình bàn tay khi hover */
+    transition: background-color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+}
+
+    .btn-quantity:hover {
+        background-color: #0056b3; /* Màu nền đậm hơn khi hover */
+    }
+
+.quantity-form {
+    display: inline; /* Hiển thị các form inline để nằm ngang nhau */
+    margin: 0; /* Loại bỏ khoảng cách mặc định */
+}

@@ -24,10 +24,11 @@
             @foreach (var product in ViewBag.TopSellingProducts)
             {
             <div class="product-item">
-                <img src="/@product.ProductImage" alt="@product.ProductName">
-
-                <h3>@product.ProductName</h3>
-                <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+               <a href="@Url.Action("Details", "Home", new { id = product.ProductID })">
+                   <img src="/@product.ProductImage" alt="@product.ProductName">
+                   <h3>@product.ProductName</h3>
+                   <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+               </a>
             </div>
             }
         </div>
@@ -38,10 +39,11 @@
             @foreach (var product in ViewBag.NewProducts)
             {
             <div class="product-item">
-                <img src="/@product.ProductImage" alt="@product.ProductName">
-
-                <h3>@product.ProductName</h3>
-                <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+                <a href="@Url.Action("Details", "Home", new { id = product.ProductID })">
+                    <img src="/@product.ProductImage" alt="@product.ProductName">
+                    <h3>@product.ProductName</h3>
+                    <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+                </a>
             </div>
             }
         </div>
@@ -52,10 +54,11 @@
             @foreach (var product in ViewBag.DiscountedProducts)
             {
             <div class="product-item">
-                <img src="/@product.ProductImage" alt="@product.ProductName">
-
-                <h3>@product.ProductName</h3>
-                <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+                <a href="@Url.Action("Details", "Home", new { id = product.ProductID })">
+                    <img src="/@product.ProductImage" alt="@product.ProductName">
+                    <h3>@product.ProductName</h3>
+                    <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+                </a>
             </div>
             }
         </div>
@@ -66,10 +69,11 @@
             @foreach (var product in ViewBag.HotProducts)
             {
             <div class="product-item">
-                <img src="/@product.ProductImage" alt="@product.ProductName">
-
-                <h3>@product.ProductName</h3>
-                <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+                <a href="@Url.Action("Details", "Home", new { id = product.ProductID })">
+                    <img src="/@product.ProductImage" alt="@product.ProductName">
+                    <h3>@product.ProductName</h3>
+                    <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+                </a>
             </div>
             }
         </div>

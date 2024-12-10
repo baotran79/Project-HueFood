@@ -36,9 +36,11 @@
                         {
                             <div class="food-item">
                                 <!-- Đổi tên thẻ div thành 'food-item' ở đây -->
-                                <img src="/@product.ProductImage" alt="@product.ProductName" />
-                                <h3>@product.ProductName</h3>
-                                <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+                                <a href="@Url.Action("Details", "Home", new { id = product.ProductID })">
+                                    <img src="/@product.ProductImage" alt="@product.ProductName" />
+                                    <h3>@product.ProductName</h3>
+                                    <p class="price"><strong>@(string.Format("{0:#,##0} VNĐ", product.Price))</strong></p>
+                                </a>
                             </div>
                         }
                     </div>

@@ -4,10 +4,17 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HueHouse.Models;
+using System;
+using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
+using System.Data.Entity.Infrastructure;  // Thêm dòng này
+using System.Diagnostics; // Thêm thư viện này để ghi log
+
 
 namespace HueHouse.Controllers
 {
     public class HomeController : Controller
+
     {
         private readonly huehousemodel db; 
 
@@ -99,11 +106,91 @@ namespace HueHouse.Controllers
         }
 
 
+        // Action xử lý thêm sản phẩm vào giỏ hàng
+        [HttpPost]
+        public ActionResult AddToCart(int productId, int quantity = 1)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home", new { returnUrl = Request.Url.AbsoluteUri });
+            }
 
+            var product = db.Products.SingleOrDefault(p => p.ProductID == productId);
+            if (product == null)
+            {
+                return HttpNotFound();
+            }
+
+            int userId = (int)Session["UserID"];
+
+            var existingCartItem = db.Cart.SingleOrDefault(c => c.UserID == userId && c.ProductID == productId);
+
+            if (existingCartItem == null)
+            {
+                var newCartItem = new Cart
+                {
+                    UserID = userId,
+                    ProductID = product.ProductID,
+                    ProductName = product.ProductName,
+                    ProductImage = product.ProductImage,
+                    Price = product.Price,
+                    Quantity = quantity,
+                    TotalAmount = product.Price * quantity,
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now
+                };
+
+                db.Cart.Add(newCartItem);
+            }
+            else
+            {
+                existingCartItem.Quantity += quantity;
+                existingCartItem.TotalAmount = existingCartItem.Quantity * existingCartItem.Price;
+                existingCartItem.UpdatedAt = DateTime.Now;
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction("ShoppingCart");
+        }
+
+
+        // Action hiển thị giỏ hàng
         public ActionResult ShoppingCart()
         {
-            return View();
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            int userId = (int)Session["UserID"];
+
+            var cartItems = db.Cart.Where(c => c.UserID == userId).ToList();
+
+            return View(cartItems);
         }
+
+
+        // Action xử lý xóa sản phẩm khỏi giỏ hàng
+        [HttpPost]
+        public ActionResult RemoveFromCart(int cartId)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            var cartItem = db.Cart.SingleOrDefault(c => c.CartID == cartId);
+
+            if (cartItem != null)
+            {
+                db.Cart.Remove(cartItem);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("ShoppingCart");
+        }
+
 
 
 
@@ -168,7 +255,7 @@ namespace HueHouse.Controllers
             // Kết quả trả về là một danh sách người dùng (dù chỉ có một người dùng hợp lệ, vì vậy dùng `ToList()` để lấy tất cả).
 
             // Kiểm tra trong bảng Admins (quản trị viên)
-            var admin = db.Admin.FirstOrDefault(a => a.UserName == username && a.Password == password);
+            var admin = db.Admin.FirstOrDefault(a => a.LoginName == username && a.Password == password);
             // Dòng này kiểm tra trong bảng `Admin` xem có tài khoản quản trị viên nào có tên đăng nhập và mật khẩu khớp với yêu cầu không.
             // `FirstOrDefault` sẽ trả về đối tượng quản trị viên đầu tiên tìm thấy hoặc `null` nếu không có.
 
@@ -208,7 +295,7 @@ namespace HueHouse.Controllers
                 // Đăng nhập thành công cho quản trị viên
                 Session["AdminID"] = admin.AdminID;          // Lưu ID quản trị viên vào session
                 Session["FullName"] = admin.FullName;        // Lưu họ và tên của quản trị viên vào session
-                Session["Username"] = admin.UserName;        // Lưu tên đăng nhập của quản trị viên vào session
+                Session["Username"] = admin.LoginName;        // Lưu tên đăng nhập của quản trị viên vào session
                 Session["Password"] = admin.Password;        // Lưu mật khẩu của quản trị viên vào session
 
                 // Chuyển hướng đến trang quản trị của admin
@@ -225,61 +312,83 @@ namespace HueHouse.Controllers
 
 
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult My_Account(string FullName, string Sex, string Phone, string Address, string Email, string Username)
+        // Hiển thị trang thông tin cá nhân của người dùng
+        public ActionResult My_Account()
         {
-            // Kiểm tra Session
-            if (Session["CustomerID"] == null)
+            // Kiểm tra nếu người dùng đã đăng nhập (dựa trên Session)
+            if (Session["UserID"] == null)
             {
-                ViewBag.Message = "Session expired. Please log in again.";
-                return RedirectToAction("Login", "Account");
+                ViewBag.Message = "Session hết hạn. Vui lòng đăng nhập lại.";
+                return RedirectToAction("LogIn", "Home");
             }
 
-            // Lấy CustomerID từ Session và kiểm tra
-            if (!int.TryParse(Session["CustomerID"].ToString(), out int customerId))
+            int userId = (int)Session["UserID"]; // Lấy UserID từ Session
+
+            // Lấy thông tin khách hàng từ database
+            var user = db.Users.FirstOrDefault(c => c.UserID == userId);
+            if (user == null)
             {
-                ViewBag.Message = "Invalid Customer ID.";
+                ViewBag.Message = "Không tìm thấy khách hàng.";
                 return View();
             }
 
+            return View(user); // Truyền thông tin khách hàng sang view
+        }
+
+
+
+       // Xử lý khi người dùng cập nhật thông tin cá nhân
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult My_Account(Users model)
+        {
+            // Kiểm tra nếu người dùng đã đăng nhập (dựa trên Session)
+            if (Session["UserID"] == null)
+            {
+                ViewBag.Message = "Session hết hạn. Vui lòng đăng nhập lại.";
+                return RedirectToAction("LogIn", "Home");
+            }
+
+            int userId = (int)Session["UserID"]; // Lấy UserID từ Session
+
             // Lấy thông tin khách hàng từ database
+            var user = db.Users.FirstOrDefault(c => c.UserID == userId);
+            if (user == null)
+            {
+                ViewBag.Message = "Không tìm thấy khách hàng.";
+                return View(model); // Nếu không tìm thấy khách hàng, trả về view với model hiện tại
+            }
+
+            // Cập nhật thông tin khách hàng
+            user.FullName = model.FullName;
+            user.Email = model.Email;
+            user.Phone = model.Phone;
+            user.Sex = model.Sex;
+            user.Address = model.Address;
+            user.Password = model.Password;
+
             try
             {
-                var user = db.Users.FirstOrDefault(c => c.UserID == customerId);
-                if (user == null)
-                {
-                    ViewBag.Message = "Customer not found.";
-                    return View();
-                }
+                db.SaveChanges(); // Lưu thay đổi vào database
 
-                // Cập nhật thông tin
-                user.FullName = FullName;
-                user.Email = Email;
-                user.Phone = Phone;
-                user.Sex = Sex;
-                user.Address = Address;
+                // Cập nhật Session với thông tin mới
+                Session["FullName"] = model.FullName;
+                Session["Email"] = model.Email;
+                Session["Phone"] = model.Phone;
+                Session["Sex"] = model.Sex;
+                Session["Address"] = model.Address;
+                Session["Password"] = model.Password;
 
-                db.SaveChanges();
-
-                // Cập nhật Session
-                Session["FullName"] = FullName;
-                Session["Email"] = Email;
-                Session["Phone"] = Phone;
-                Session["Sex"] = Sex;
-                Session["Address"] = Address;
-
-                ViewBag.Message = "Account information updated successfully.";
+                ViewBag.Message = "Cập nhật thông tin thành công."; // Hiển thị thông báo thành công
             }
             catch (Exception ex)
             {
-                // Log lỗi nếu cần thiết
-                // Logger.LogError(ex); // Gợi ý sử dụng Logger nếu có
-                ViewBag.Message = "An error occurred while updating account information. Please try again.";
+                ViewBag.Message = "Có lỗi xảy ra khi cập nhật thông tin. Vui lòng thử lại."; // Hiển thị thông báo lỗi
             }
 
-            return View();
+            return View(user); // Trả về view với thông tin khách hàng
         }
+
 
 
 
@@ -327,5 +436,69 @@ namespace HueHouse.Controllers
         {
             return View();
         }
+
+        // chi tiết sản phẩm
+        public ActionResult Details(int id)
+        {
+            var product = db.Products.FirstOrDefault(p => p.ProductID == id);
+            var productDetail = db.ProductDetails.FirstOrDefault(pd => pd.ProductID == id);
+
+            if (product == null || productDetail == null)
+            {
+                return HttpNotFound();
+            }
+
+            var viewModel = new ProductDetailsViewModel
+            {
+                Products = product,
+                ProductDetails = productDetail
+            };
+
+            return View(viewModel);
+        }
+
+
+        // Tăng giảm số lượng sản phẩm trong giỏ hàng
+        public ActionResult UpdateQuantity(int cartId, string actionType)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            int userId = (int)Session["UserID"];
+
+            var cartItem = db.Cart.SingleOrDefault(c => c.CartID == cartId && c.UserID == userId);
+
+            if (cartItem == null)
+            {
+                return HttpNotFound();
+            }
+
+            if (actionType == "increase")
+            {
+                cartItem.Quantity += 1;
+            }
+            else if (actionType == "decrease")
+            {
+                if (cartItem.Quantity > 1)
+                {
+                    cartItem.Quantity -= 1;
+                }
+            }
+
+            cartItem.TotalAmount = cartItem.Quantity * cartItem.Price;
+            cartItem.UpdatedAt = DateTime.Now;
+
+            db.SaveChanges();
+
+            return RedirectToAction("ShoppingCart");
+        }
+
+
+        
+
+
+
     }
 }

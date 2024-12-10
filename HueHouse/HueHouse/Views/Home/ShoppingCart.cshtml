@@ -1,23 +1,83 @@
-﻿@{
+﻿@model List<HueHouse.Models.Cart>
+
+@{
     ViewBag.Title = "Giỏ Hàng";
 }
 
 <div class="container">
-    <div class="main">
-        <div class="shopping-empty">
-            <!-- Hình ảnh empty cart -->
-            <img src="~/Content/Images/empty_cart.jpg" alt="Giỏ hàng trống" class="empty-cart-img">
+    
+        @if (Model == null || !Model.Any())
+        {
+            <div class="main">
+                <div class="shopping-empty">
+                    <img src="~/Content/Images/empty_cart.jpg" alt="Giỏ hàng trống" class="empty-cart-img">
+                    <p class="empty-cart-text">
+                        Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng. Hãy dạo một vòng <strong>Thực Đơn</strong> để chọn sản phẩm yêu thích nhé.
+                        <strong>Ẩm Thực Huế - HueHouse</strong> có nhiều món ngon lắm!
+                    </p>
+                    <a href="@Url.Action("Product", "Home")" class="btn-continue">
+                        Tiếp Tục Chọn Món
+                    </a>
+                </div>
+            </div>
+        }
+        else
+        {
+            <div class="Shopping-page">
 
-            <!-- Thông báo -->
-            <p class="empty-cart-text">
-                Hiện tại bạn chưa có sản phẩm nào trong giỏ hàng. Hãy dạo một vòng <strong>Thực Đơn</strong> để chọn sản phẩm yêu thích nhé.
-                <strong>Ẩm Thực Huế - HueHouse</strong> có nhiều món ngon lắm!
-            </p>
+                <div class="shopping-cart">
+                    <h1>Giỏ Hàng Của Bạn</h1>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Hình Ảnh</th>
+                                <th>Tên Sản Phẩm</th>
+                                <th>Đơn Giá</th>
+                                <th>Số Lượng</th>
+                                <th>Tổng Tiền</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td><img src="~/@item.ProductImage" alt="@item.ProductName" class="product-img" /></td>
+                                    <td>@item.ProductName</td>
+                                    <td>@(string.Format("{0:#,##0} VNĐ", item.Price))</td>
+                                    <td>
+                                        <div class="quantity-control">
+                                            <form action="@Url.Action("UpdateQuantity", "Home")" method="post" class="quantity-form">
+                                                <input type="hidden" name="cartId" value="@item.CartID" />
+                                                <input type="hidden" name="actionType" value="decrease" />
+                                                <button type="submit" class="btn-quantity">-</button>
+                                            </form>
+                                            @item.Quantity
+                                            <form action="@Url.Action("UpdateQuantity", "Home")" method="post" class="quantity-form">
+                                                <input type="hidden" name="cartId" value="@item.CartID" />
+                                                <input type="hidden" name="actionType" value="increase" />
+                                                <button type="submit" class="btn-quantity">+</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                    <td>@(string.Format("{0:#,##0} VNĐ", item.TotalAmount))</td>
+                                    <td>
+                                        <form action="@Url.Action("RemoveFromCart", "Home")" method="post">
+                                            <input type="hidden" name="cartId" value="@item.CartID" />
+                                            <button type="submit" class="btn btn-danger">Xóa</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
 
-            <!-- Button tiếp tục chọn món -->
-            <a href="@Url.Action("Product", "Home")" class="btn-continue">
-                Tiếp Tục Chọn Món
-            </a>
-        </div>
-    </div>
+                    <div class="cart-summary">
+                        <h2>Tổng Tiền: @(string.Format("{0:#,##0} VNĐ", Model.Sum(i => i.TotalAmount)))</h2>
+                        <a href="@Url.Action("Checkout", "Home")" class="btn btn-success">Đặt Hàng</a>
+                    </div>
+                </div>
+
+            </div>
+        }
 </div>

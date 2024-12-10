@@ -24,7 +24,7 @@ namespace HueHouse.Models
 
         [Required]
         [StringLength(50)]
-        public string UserName { get; set; }
+        public string LoginName { get; set; }
 
         [Required]
         [StringLength(255)]
