@@ -4,11 +4,11 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using HueHouse.Models;
-using System;
 using System.Data.SqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Menu;
 using System.Data.Entity.Infrastructure;  // Thêm dòng này
-using System.Diagnostics; // Thêm thư viện này để ghi log
+using System.Diagnostics;
+using System.Data.Entity.Validation; // Thêm thư viện này để ghi log
 
 
 namespace HueHouse.Controllers
@@ -189,6 +189,33 @@ namespace HueHouse.Controllers
             }
 
             return RedirectToAction("ShoppingCart");
+        }
+
+        //trang ckeckout kiểm tra trước khi đặt hàng
+        public ActionResult Checkout()
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            int userId = (int)Session["UserID"];
+            var cartItems = db.Cart.Where(c => c.UserID == userId).ToList();
+
+            var user = db.Users.Find(userId);
+
+            var checkoutViewModel = new CheckoutViewModel
+            {
+                CartItems = cartItems,
+                Receiver = new ReceiverInfo
+                {
+                    Name = user.Username,
+                    Address = user.Address,
+                    PhoneNumber = user.Phone,
+                }
+            };
+
+            return View(checkoutViewModel);
         }
 
 
@@ -496,7 +523,9 @@ namespace HueHouse.Controllers
         }
 
 
-        
+
+       
+
 
 
 

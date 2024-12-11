@@ -1,0 +1,65 @@
+﻿@model HueHouse.Models.CheckoutViewModel
+
+@{
+    ViewBag.Title = "Thông Tin Đơn Hàng";
+}
+
+<div class="container">
+    <div class="checkout-page">
+
+        <h1>Thông Tin Đơn Hàng</h1>
+
+        @if (Model.CartItems == null || !Model.CartItems.Any())
+        {
+            <p>Giỏ hàng của bạn trống.</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Hình Ảnh</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Đơn Giá</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng Tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr>
+                            <td><img src="~/@item.ProductImage" alt="@item.ProductName" class="product-img" /></td>
+                            <td>@item.ProductName</td>
+                            <td>@(string.Format("{0:#,##0} VNĐ", item.Price))</td>
+                            <td>@item.Quantity</td>
+                            <td>@(string.Format("{0:#,##0} VNĐ", item.TotalAmount))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+            <div class="cart-summary">
+                <h2>Tổng Tiền: @(string.Format("{0:#,##0} VNĐ", Model.CartItems.Sum(i => i.TotalAmount)))</h2>
+            </div>
+
+            <h2>Thông Tin Người Nhận</h2>
+            <form action="@Url.Action("ConfirmOrder", "Home")" method="post">
+                <div class="form-group">
+                    <label for="Receiver_Name">Tên Người Nhận:</label>
+                    <input type="text" id="Receiver_Name" name="Receiver.Name" class="form-control" value="@Model.Receiver.Name" required />
+                </div>
+                <div class="form-group">
+                    <label for="Receiver_Address">Địa Chỉ:</label>
+                    <input type="text" id="Receiver_Address" name="Receiver.Address" class="form-control" value="@Model.Receiver.Address" required />
+                </div>
+                <div class="form-group">
+                    <label for="Receiver_PhoneNumber">Số Điện Thoại:</label>
+                    <input type="text" id="Receiver_PhoneNumber" name="Receiver.PhoneNumber" class="form-control" value="@Model.Receiver.PhoneNumber" required />
+                </div>
+                <button type="submit" class="btn btn-primary">Xác Nhận Đặt Hàng</button>
+            </form>
+        }
+
+    </div>
+</div>

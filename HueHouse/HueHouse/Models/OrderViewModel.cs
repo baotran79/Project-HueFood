@@ -15,6 +15,6 @@ namespace HueHouse.Models
         public string UserEmail { get; set; }
         public string UserPhone { get; set; }
         public string UserAddress { get; set; }
-        public double TotalAmount { get; set; }
+        public int TotalAmount { get; set; }
     }
 }

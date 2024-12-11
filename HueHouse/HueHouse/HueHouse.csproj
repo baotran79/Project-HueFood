@@ -243,12 +243,14 @@
     <Compile Include="Models\AdminManagement.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Categories.cs" />
+    <Compile Include="Models\ReceiverInfo.cs" />
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Models\HighlightedProducts.cs" />
     <Compile Include="Models\huehousemodel.cs" />
     <Compile Include="Models\OrderDetails.cs" />
     <Compile Include="Models\OrderHistory.cs" />
     <Compile Include="Models\Orders.cs" />
+    <Compile Include="Models\CheckoutViewModel.cs" />
     <Compile Include="Models\Payments.cs" />
     <Compile Include="Models\OrderViewModel.cs" />
     <Compile Include="Models\ProductDetailsViewModel.cs" />
@@ -359,6 +361,7 @@
     <Content Include="Views\Home\Order_Instructions.cshtml" />
     <Content Include="Views\Home\My_Account.cshtml" />
     <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Home\Checkout.cshtml" />
     <Content Include="Views\Home\Order.cshtml" />
   </ItemGroup>
   <ItemGroup>

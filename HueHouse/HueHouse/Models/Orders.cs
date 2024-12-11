@@ -1,4 +1,4 @@
-namespace HueHouse.Models
+﻿namespace HueHouse.Models
 {
     using System;
     using System.Collections.Generic;
@@ -23,12 +23,12 @@ namespace HueHouse.Models
 
         public DateTime? OrderDate { get; set; }
 
-        [Required]
         [StringLength(50)]
         public string Status { get; set; }
 
         public int TotalAmount { get; set; }
 
+       
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

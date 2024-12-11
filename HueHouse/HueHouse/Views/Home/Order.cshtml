@@ -1,51 +1,49 @@
 ﻿@model HueHouse.Models.OrderViewModel
 
 @{
-    ViewBag.Title = "Thông Tin Đơn Hàng";
+    ViewBag.Title = "Order";
 }
 
 <div class="container">
-    <h1>Thông Tin Đơn Hàng</h1>
+    <div class="order-page">
+        <h1>Thông Tin Đơn Hàng</h1>
 
-    <div class="order-info">
-        <h2>Thông Tin Đơn Hàng</h2>
-        <p><strong>Mã Đơn Hàng:</strong> @Model.Orders.OrderID</p>
-        <p><strong>Ngày Đặt:</strong> @(Model.Orders.OrderDate.HasValue ? Model.Orders.OrderDate.Value.ToString("dd/MM/yyyy") : "Không có ngày đặt")</p>
-        <p><strong>Tổng Tiền:</strong> @(string.Format("{0:#,##0} VNĐ", Model.Orders.TotalAmount))</p>
-        <p><strong>Trạng Thái:</strong> @Model.Orders.Status</p>
-    </div>
+        @if (Model.CartItems == null || !Model.CartItems.Any())
+        {
+            <p>Đơn hàng của bạn trống.</p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Hình Ảnh</th>
+                        <th>Tên Sản Phẩm</th>
+                        <th>Số Lượng</th>
+                        <th>Tổng Tiền</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.CartItems)
+                    {
+                        <tr>
+                            <td><img src="~/@item.ProductImage" alt="@item.ProductName" class="product-img" /></td>
+                            <td>@item.ProductName</td>
+                            <td>@item.Quantity</td>
+                            <td>@(string.Format("{0:#,##0} VNĐ", item.TotalAmount))</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
 
-    <h3>Chi Tiết Đơn Hàng</h3>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Tên Sản Phẩm</th>
-                <th>Số Lượng</th>
-                <th>Đơn Giá</th>
-                <th>Tổng Tiền</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var detail in Model.OrderDetails)
-            {
-                <tr>
-                    <td>@detail.Products.ProductName</td>
-                    <td>@detail.Quantity</td>
-                    <td>@(string.Format("{0:#,##0} VNĐ", detail.Price))</td>
-                    <td>@(string.Format("{0:#,##0} VNĐ", detail.TotalAmount))</td>
-                </tr>
-            }
-        </tbody>
-    </table>
+            <div class="cart-summary">
+                <h2>Tổng Tiền: @(string.Format("{0:#,##0} VNĐ", Model.TotalAmount))</h2>
+            </div>
 
-    <div class="order-summary">
-        <h3>Thông Tin Khách Hàng</h3>
-        <p><strong>Tên Khách Hàng:</strong> @Model.Orders.Users.FullName</p>
-        <p><strong>Địa Chỉ:</strong> @Model.Orders.Users.Address</p>
-        <p><strong>Số Điện Thoại:</strong> @Model.Orders.Users.Phone</p>
-    </div>
-
-    <div class="order-actions">
-        <a href="@Url.Action("Payment", "Home", new { orderId = Model.Orders.OrderID })" class="btn btn-primary">Thanh Toán</a>
+            <div class="order-actions">
+                <a href="@Url.Action("OrderDetails", "Home")" class="btn btn-info">Chi Tiết Đơn Hàng</a>
+                <a href="@Url.Action("Payment", "Home")" class="btn btn-success">Thanh Toán</a>
+            </div>
+        }
     </div>
 </div>
