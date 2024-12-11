@@ -24,11 +24,11 @@
         public DateTime? OrderDate { get; set; }
 
         [StringLength(50)]
-        public string Status { get; set; }
+        
+        public string Status { get; set; } = string.Empty;
 
         public int TotalAmount { get; set; }
 
-       
         public DateTime? CreatedAt { get; set; }
 
         public DateTime? UpdatedAt { get; set; }

@@ -47,15 +47,15 @@
             <form action="@Url.Action("ConfirmOrder", "Home")" method="post">
                 <div class="form-group">
                     <label for="Receiver_Name">Tên Người Nhận:</label>
-                    <input type="text" id="Receiver_Name" name="Receiver.Name" class="form-control" value="@Model.Receiver.Name" required />
+                    <input type="text" id="Receiver_Name" name="Receiver.Name" class="form-control" value="@Model.Users.Username" required />
                 </div>
                 <div class="form-group">
                     <label for="Receiver_Address">Địa Chỉ:</label>
-                    <input type="text" id="Receiver_Address" name="Receiver.Address" class="form-control" value="@Model.Receiver.Address" required />
+                    <input type="text" id="Receiver_Address" name="Receiver.Address" class="form-control" value="@Model.Users.Address" required />
                 </div>
                 <div class="form-group">
                     <label for="Receiver_PhoneNumber">Số Điện Thoại:</label>
-                    <input type="text" id="Receiver_PhoneNumber" name="Receiver.PhoneNumber" class="form-control" value="@Model.Receiver.PhoneNumber" required />
+                    <input type="text" id="Receiver_PhoneNumber" name="Receiver.PhoneNumber" class="form-control" value="@Model.Users.Phone" required />
                 </div>
                 <button type="submit" class="btn btn-primary">Xác Nhận Đặt Hàng</button>
             </form>

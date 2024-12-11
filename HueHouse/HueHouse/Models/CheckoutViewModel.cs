@@ -9,7 +9,7 @@
     public class CheckoutViewModel
     {
         public List<Cart> CartItems { get; set; }
-        public ReceiverInfo Receiver { get; set; }
+        public Users Users { get; set; }
     }
 
 

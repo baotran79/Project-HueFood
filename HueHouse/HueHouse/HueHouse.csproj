@@ -243,7 +243,6 @@
     <Compile Include="Models\AdminManagement.cs" />
     <Compile Include="Models\Cart.cs" />
     <Compile Include="Models\Categories.cs" />
-    <Compile Include="Models\ReceiverInfo.cs" />
     <Compile Include="Models\FoodItem.cs" />
     <Compile Include="Models\HighlightedProducts.cs" />
     <Compile Include="Models\huehousemodel.cs" />

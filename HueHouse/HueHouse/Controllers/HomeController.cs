@@ -207,11 +207,11 @@ namespace HueHouse.Controllers
             var checkoutViewModel = new CheckoutViewModel
             {
                 CartItems = cartItems,
-                Receiver = new ReceiverInfo
+                Users = new Users
                 {
-                    Name = user.Username,
+                    Username = user.Username,
                     Address = user.Address,
-                    PhoneNumber = user.Phone,
+                    Phone= user.Phone,
                 }
             };
 
@@ -524,7 +524,128 @@ namespace HueHouse.Controllers
 
 
 
-       
+        //Trang Order
+        [HttpPost]
+        public ActionResult ConfirmOrder(CheckoutViewModel model)
+        {
+            if (Session["UserID"] == null)
+            {
+                return RedirectToAction("Login", "Home");
+            }
+
+            int userId = (int)Session["UserID"];
+            var cartItems = db.Cart.Where(c => c.UserID == userId).ToList();
+
+            if (!cartItems.Any())
+            {
+                return RedirectToAction("ShoppingCart");
+            }
+
+            int totalAmount = cartItems.Sum(item => item.TotalAmount ?? 0);
+
+            var newOrder = new Orders
+            {
+                UserID = userId,
+                OrderDate = DateTime.Now,
+                Status = "Đang Xử Lý",
+                TotalAmount = (int)totalAmount,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
+            };
+
+            db.Orders.Add(newOrder);
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Debug.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
+                ModelState.AddModelError("", "Unable to save order. Validation failed.");
+                return View("Error");
+            }
+            catch (DbUpdateException ex)
+            {
+                Debug.WriteLine($"Error saving order: {ex.Message}");
+                Debug.WriteLine($"Inner exception: {ex.InnerException?.Message}");
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                return View("Error");
+            }
+
+            foreach (var item in cartItems)
+            {
+                var orderDetail = new OrderDetails
+                {
+                    OrderID = newOrder.OrderID,
+                    ProductID = item.ProductID,
+                    Quantity = item.Quantity,
+                    Price = item.Price,
+                    TotalAmount = item.TotalAmount,
+                };
+                db.OrderDetails.Add(orderDetail);
+            }
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbEntityValidationException ex)
+            {
+                foreach (var validationErrors in ex.EntityValidationErrors)
+                {
+                    foreach (var validationError in validationErrors.ValidationErrors)
+                    {
+                        Debug.WriteLine($"Property: {validationError.PropertyName} Error: {validationError.ErrorMessage}");
+                    }
+                }
+                ModelState.AddModelError("", "Unable to save order details. Validation failed.");
+                return View("Error");
+            }
+            catch (DbUpdateException ex)
+            {
+                Debug.WriteLine($"Error saving order details: {ex.Message}");
+                Debug.WriteLine($"Inner exception: {ex.InnerException?.Message}");
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                return View("Error");
+            }
+
+            // Clear cart
+            db.Cart.RemoveRange(cartItems);
+            db.SaveChanges();
+
+            return RedirectToAction("Order", new { orderId = newOrder.OrderID });
+        }
+
+        public ActionResult Order(int orderId)
+        {
+            var order = db.Orders.Include("OrderDetails.Products").FirstOrDefault(o => o.OrderID == orderId);
+            if (order == null)
+            {
+                return HttpNotFound();
+            }
+
+            var model = new OrderViewModel
+            {
+                CartItems = order.OrderDetails.Select(od => new Cart
+                {
+                    ProductImage = od.Products.ProductImage,
+                    ProductName = od.Products.ProductName,
+                    Quantity = od.Quantity,
+                    Price = od.Price,
+                    TotalAmount = od.TotalAmount
+                }).ToList(),
+                TotalAmount = order.TotalAmount
+            };
+
+            return View(model);
+        }
 
 
 
